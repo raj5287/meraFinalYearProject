@@ -25,6 +25,8 @@ public class ForgetPass {
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
+					
+					/*sanfnsakfl*/
 				}
 			}
 		});
