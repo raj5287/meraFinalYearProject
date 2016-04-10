@@ -135,37 +135,55 @@ public class Launcher extends JFrame {
 		btn1.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btn1.addActionListener((evt)-> {
 			
+			int u=0;
+			String user = (String) comboBox1.getSelectedItem();	//getting user from combobox
+			if(user.equals("Student"))
+			{
+				u=1;
+			}
+			else if(user.equals("Teacher")){
+				u=2;
+			}
+			else if(user.equals("Coordinator")){
+				u=3;
+			}
+			else if(user.equals("HOD")){
+				u=4;
+			}
 			
 			String userid=tf1.getText();
 			String pass=new String (pf1.getPassword());
-			
 			SessionFactory f=createSessionFactory();
 			factory=f;
-			Session s=factory.openSession();
-			String hql="from Students";
-			Query q=s.createQuery(hql);
 			
-			List<Students> list=q.list();
-			
-			String records[][]=new String[list.size()][2];
-			int r=0;
-			for(Students rr : list){
-				records[r][0]=rr.getEmailid();
-				records[r][1]=rr.getPassword();
-				if(userid.equals(records[r][0]) && pass.equals(records[r][1])){
-					flag=1;
-					set_User=userid;
-					System.out.println("Login successful");
-					//create the object of next window here
-					new Stu_Main();
-					System.out.println("avb");
-					
-				}
-				else{
-						System.out.println("Login not successful");
-						r++;
-					}
-			}
+			switch(u){
+				case 1:	Session s=factory.openSession();
+						String hql="from Students";
+						Query q=s.createQuery(hql);
+				
+						List<Students> list=q.list();
+				
+						String records[][]=new String[list.size()][2];
+						int r=0;
+						for(Students rr : list){
+							records[r][0]=rr.getEmailid();
+							records[r][1]=rr.getPassword();
+							if(userid.equals(records[r][0]) && pass.equals(records[r][1])){
+								flag=1;
+								set_User=userid;
+								System.out.println("Login successful");
+								//create the object of next window here
+								new Stu_Main();
+								System.out.println("avb");
+								
+							}
+							else{
+								System.out.println("Login not successful");
+								r++;
+							}
+						}
+						break;
+			}	
 			
 		});
 		btn1.setBounds(431, 323, 103, 32);
