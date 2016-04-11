@@ -1,4 +1,6 @@
 package com.student;
+import coordinator.ViewDocumentFrame;
+import coordinator.ViewNoticeFrame;
 
 import java.io.File;
 import java.awt.EventQueue;
@@ -16,6 +18,12 @@ import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.border.SoftBevelBorder;
+
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
+
 import javax.swing.border.BevelBorder;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -33,6 +41,7 @@ import java.awt.event.MouseEvent;
 public class Stu_Main {
 
 	private JFrame frame1;
+	private SessionFactory factory;
 	
 	/**
 	 * Launch the application.
@@ -123,7 +132,8 @@ public class Stu_Main {
 		btnNotice.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				View_Notice a= new View_Notice();
+				SessionFactory factory=createSessionFactory();
+				ViewNoticeFrame a= new ViewNoticeFrame("Notices",factory);
 			}
 		});
 		btnNotice.addActionListener(new ActionListener() {
@@ -147,6 +157,8 @@ public class Stu_Main {
 		btnDocuments.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				SessionFactory factory=createSessionFactory();
+				ViewDocumentFrame a= new ViewDocumentFrame("Documents",factory);
 				
 			}
 		});
@@ -187,11 +199,16 @@ public class Stu_Main {
 		Image img=new ImageIcon(this.getClass().getResource("/icon.png")).getImage();
 		lblNewLabel.setIcon(new ImageIcon(img));
 		lblNewLabel.setBounds(109, 80, 341, 256);
-		panel_1.add(lblNewLabel);
-				
-		
-		
-		
+		panel_1.add(lblNewLabel);	
 		
 	}
+	
+	public static SessionFactory createSessionFactory() {
+		Configuration configuration = new Configuration();
+		configuration.configure("hibernate.cfg.xml");
+		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
+		        configuration.getProperties()).build();
+		SessionFactory sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+		return sessionFactory;
+		}
 }
