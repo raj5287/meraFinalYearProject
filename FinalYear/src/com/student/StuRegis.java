@@ -63,7 +63,7 @@ public class StuRegis {
 	private JTextField textField_30;
 	private JTextField textField_31;
 	private JTextField textField_32;
-	
+		private JTextField textField_33;
 	/**
 	 * Launch the application.
 	 */
