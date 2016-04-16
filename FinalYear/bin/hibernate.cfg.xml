@@ -13,6 +13,11 @@
     <property name="show_sql">true</property>
     
     <mapping class="com.student.Students"/>
+    <mapping class="coordinator.Coordinators"/>
+    <mapping class="teacher.Teachers"/>
+    <mapping class="com.hod.Hods"/>
+    <mapping class="coordinator.Documents"/>
+    <mapping class="coordinator.Notices"/>
       
   </session-factory>
 </hibernate-configuration>

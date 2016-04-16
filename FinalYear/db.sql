@@ -4,4 +4,7 @@ twnoe varchar(30) not null,twyop varchar(30) not null,twboeard varchar(30) not n
 uregno int(30) not null,urollno int(30) not null,marks1 int(30) not null,marks2 int(30) not null,marks3 int(30) not null,marks4 int(30) not null,marks5 int(30) not null,marks6 int(30) not null,marks7 int(30) not null,marks8 int(30) not null);
 ALTER TABLE students CHANGE twnoe twnoe varchar(50) DEFAULT NULL;
 create table coordinators(name varchar(30) not null, email varchar(30) not null,mobno varchar(30) not null,userid varchar(30) primary key,password varchar(30) not null);
-create table documents(name varchar(30) not nullvarchar(30) not null, subject varchar(30) not null);
+create table documents(name varchar(30) not null primary key, subject varchar(30) not null,date varchar(15));
+create table teachers(name varchar(30) not null, email varchar(30) not null,mobno varchar(30) not null,userid varchar(30) primary key,password varchar(30) not null);
+create table hods(name varchar(30) not null, email varchar(30) not null,mobno varchar(30) not null,userid varchar(30) primary key,password varchar(30) not null);
+create table notices(name varchar(30) not null primary key, subject varchar(30) not null,date varchar(15));
