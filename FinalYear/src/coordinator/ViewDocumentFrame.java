@@ -30,7 +30,7 @@ public class ViewDocumentFrame extends JFrame {
 		
 		List<Documents> list=q.list();
 		
-		String records[][]=new String[list.size()][3];
+		String records[][]=new String[list.size()][4];
 		int r=0;
 		for(Documents rr : list){
 			records[r][0]=rr.getName();
@@ -39,7 +39,7 @@ public class ViewDocumentFrame extends JFrame {
 			r++;
 			
 		}
-		String colnames[]={"Name","Subject","Date"};
+		String colnames[]={"Name","Subject","Date","Download"};
 		tableDocs =new JTable(records,colnames);
 		add(new JScrollPane(tableDocs));
 		

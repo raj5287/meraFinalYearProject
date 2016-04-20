@@ -45,6 +45,8 @@ public class ViewProfile extends JFrame {
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private SessionFactory factory;
+	static String picPath;
+	JLabel imgLabel ;
 	
 	/**
 	 * Launch the application.
@@ -107,12 +109,6 @@ public class ViewProfile extends JFrame {
 		lblEmailId.setBounds(24, 230, 135, 14);
 		frame1.getContentPane().add(lblEmailId);
 		
-
-
-		JLabel imgLabel = new JLabel(new ImageIcon("D:/college/Workspace/hibernatekasu/Image/folder.jpg"));
-		imgLabel.setBounds(563, 55, 300, 300);
-		frame1.getContentPane().add(imgLabel);
-		
 		JButton btnBack = new JButton("Back");
 		btnBack.setBounds(563, 343, 89, 23);
 		frame1.getContentPane().add(btnBack);
@@ -159,7 +155,23 @@ public class ViewProfile extends JFrame {
 		String mob=String.valueOf(stu.getSmobno());
 		textField_3.setText(mob);
 		textField_4.setText(stu.getEmailid());
+		picPath=stu.getPic();
 		
+		imgLabel= new JLabel("Profile Pic");
+		imgLabel.setBounds(523, 69, 169, 171);
+		frame1.getContentPane().add(imgLabel);
+		imgLabel.setIcon(ResizeImage(picPath));
+		
+	}
+	
+	public ImageIcon ResizeImage(String ImagePath)
+	{ 
+
+		ImageIcon MyImage = new ImageIcon(ImagePath); 
+		Image img = MyImage.getImage(); 
+		Image newImg = img.getScaledInstance(imgLabel.getWidth(), imgLabel.getHeight(), Image.SCALE_SMOOTH); 
+		ImageIcon image = new ImageIcon(newImg); 
+		return image; 
 	}
 	
 	public static SessionFactory createSessionFactory() {

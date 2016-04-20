@@ -68,7 +68,7 @@ public class View_Map {
 			
 				
 		frame1.setVisible(true);
-		frame1.setBounds(100, 100, 818, 489);
+		frame1.setBounds(100, 100, 900, 550);
 		frame1.setDefaultCloseOperation(frame1.DISPOSE_ON_CLOSE);
 		frame1.getContentPane().setLayout(null);
 		
@@ -84,7 +84,7 @@ public class View_Map {
 		JLabel lblPic = new JLabel("");
 		Image img1=new ImageIcon(this.getClass().getResource("/map.png")).getImage();
 		lblPic.setIcon(new ImageIcon(img1));
-		lblPic.setBounds(43, 0, 725, 405);
+		lblPic.setBounds(30, 0, 890, 540);
 		frame1.getContentPane().add(lblPic);
 		
 		

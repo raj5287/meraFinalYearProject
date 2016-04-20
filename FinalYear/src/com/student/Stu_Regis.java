@@ -8,6 +8,8 @@ import java.awt.Panel;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
@@ -27,7 +29,6 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-
 import javax.swing.border.BevelBorder;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -44,7 +45,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 @SuppressWarnings("unused")
-public class Stu_Regis {
+public class Stu_Regis extends JFrame {
 
 	private JFrame frame1;
 	private JTextField name;	//student's name
@@ -87,7 +88,7 @@ public class Stu_Regis {
     private JPasswordField password;
 	private JPasswordField cnfpass;
 	JLabel lblUploadPic ;
-	String sname,fname,foccp,mname,sgender,dob,presentadd,permadd,pic;
+	String sname,fname,foccp,mname,sgender,dob,presentadd,permadd,pic,destination;
 	String tnoe,tyop,tboard,tsname,tmos;
 	int tsper,tactper;
 	String twnoe,twyop,twboard,twsname,twmos;
@@ -97,6 +98,8 @@ public class Stu_Regis {
 	String email,pass;
 	String smobno,fmobno,uregno,urollno;
 	int marks1,marks2,marks3,marks4,marks5,marks6,marks7,marks8;
+	private JTextField sourceFileTextField;
+	static String fileName;
 	
 	public ImageIcon ResizeImage(String ImagePath)
 	{ 
@@ -185,9 +188,46 @@ public class Stu_Regis {
 		panel.add(lblNewLabel_1);
 		
 		lblUploadPic = new JLabel("Upload Pic");
-		lblUploadPic.setBounds(449, 33, 133, 86);
+		lblUploadPic.setBounds(417, 33, 133, 129);
 		panel.add(lblUploadPic);
 		
+		sourceFileTextField = new JTextField();
+		sourceFileTextField.setBounds(598, 87, 153, 20);
+		panel.add(sourceFileTextField);
+		sourceFileTextField.setColumns(10);
+		
+		
+		JButton btnbrowse = new JButton("Browse\r\n");
+		btnbrowse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnbrowse.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				JFileChooser jFileChooser = new JFileChooser();
+		          jFileChooser.setDialogTitle("SAVE");
+		          int status = jFileChooser.showOpenDialog(Stu_Regis.this);
+		         jFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+		          FileNameExtensionFilter filter = new FileNameExtensionFilter("*.Images", "*.jpg","*.gif","*.png");
+		          jFileChooser.addChoosableFileFilter(filter);
+		          String filename = jFileChooser.getSelectedFile().getAbsolutePath();
+					File file1 = new File(filename);
+					fileName = file1.getName();
+					System.out.print(fileName);
+					if (status == JFileChooser.APPROVE_OPTION) {
+						String selectedFilePath = jFileChooser.getSelectedFile().getAbsolutePath();
+						sourceFileTextField.setText(selectedFilePath);
+						lblUploadPic.setIcon(ResizeImage(selectedFilePath));
+					}
+		          
+		          else if(status == JFileChooser.CANCEL_OPTION){
+		              System.out.println("No File Select");
+		          }
+			}
+			});
+		btnbrowse.setBounds(639, 127, 89, 23);
+		panel.add(btnbrowse);
 		
 		
 		JButton btnContinue = new JButton("Continue");
@@ -203,6 +243,21 @@ public class Stu_Regis {
 				mname=mName.getText();
 				presentadd=presentAdd.getText();
 				permadd=perAdd.getText();
+				
+				File sourceFile = new File(sourceFileTextField.getText());
+				destination = "E:/" + fileName;
+
+				File destinationFile = new File(destination);
+				Path sourcePath = sourceFile.toPath();
+				Path destinationPath = destinationFile.toPath();
+				try {
+					Files.copy(sourcePath, destinationPath);
+					System.out.print("File Copied");
+				} catch (IOException ex) {
+					ex.printStackTrace();
+					System.out.print("File NOt Copied");
+				}
+
 				
 			}
 		});
@@ -265,49 +320,6 @@ public class Stu_Regis {
 		gender.setBounds(172, 190, 68, 20);
 		panel.add(gender);
 		String sgender = (String) gender.getSelectedItem();
-		
-		JButton btnbrowse = new JButton("Browse\r\n");
-		btnbrowse.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				JFileChooser file = new JFileChooser(new File("C:\\"));
-		          file.setDialogTitle("SAVE");
-		         int result =file.showSaveDialog(null);
-		         file.setFileSelectionMode(JFileChooser.FILES_ONLY);
-				 // file.setCurrentDirectory(new File(System.getProperty("user.home")));
-		          FileNameExtensionFilter filter = new FileNameExtensionFilter("*.Images", "*.jpg","*.gif","*.png");
-		          file.addChoosableFileFilter(filter);
-		     		
-		          /* {
-		      		JFileChooser fileChooser = new JFileChooser();
-		      		fileChooser.setDialogTitle("Specify a file to save");
-
-		      		int userSelection = fileChooser.showSaveDialog(null);
-		      		if (userSelection == JFileChooser.APPROVE_OPTION) {
-		      			File fileToSave = fileChooser.getSelectedFile();
-		      			System.out.println("Save as file: " + fileToSave.getAbsolutePath());
-		      		}*/
-		          if(result == JFileChooser.APPROVE_OPTION){
-		        	 
-		              File selectedFile = file.getSelectedFile();
-		              ImageIcon image=new ImageIcon(selectedFile.getAbsolutePath());
-		              String path = selectedFile.getAbsolutePath();
-		              lblUploadPic.setIcon(ResizeImage(path));
-		              
-		          }
-		          
-		          else if(result == JFileChooser.CANCEL_OPTION){
-		              System.out.println("No File Select");
-		          }
-			}}
-		 );
-		btnbrowse.setBounds(639, 67, 89, 23);
-		panel.add(btnbrowse);
-		
-	/*	JButton btnUpload = new JButton("Upload");
-		btnUpload.setBounds(504, 184, 89, 23);
-		panel.add(btnUpload);
-*/
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane_1.addTab("Academic", null, tabbedPane, null);
@@ -739,6 +751,7 @@ public class Stu_Regis {
 				ob.setDob(dob);
 				ob.setPresentadsress(presentadd);
 				ob.setPermaddress(permadd);
+				ob.setPic(destination);
 				ob.setSmobno(smobno);
 				ob.setFmobno(fmobno);
 				ob.setTnoe(tnoe);
