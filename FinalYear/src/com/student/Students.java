@@ -12,8 +12,8 @@ import javax.persistence.Table;
 public class Students {
 	
 	
-	private String emailid, password,name,gender,fname,foccupation, mname,dob,presentadsress, permaddress,pic;
-	private String smobno,fmobno,uregno,urollno;
+	private String userid,emailid, password,name,gender,fname,foccupation, mname,dob,presentadsress, permaddress,pic;
+	private String smobno,fmobno,uregno,urollno,cursem;
 	//tenth details
 	private String tnoe,tyop,tboard,tsname,tmos,tsper,tactper;
 	//twelfth details
@@ -21,9 +21,14 @@ public class Students {
 	//diploma details
 	private String dnou,stream,dyop,dsper;
 	//b.tech details
-	private int marks1,marks2,marks3,marks4,marks5,marks6,marks7,marks8;
-	
+	private String marks1,marks2,marks3,marks4,marks5,marks6,marks7,marks8;
 	@Id
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
 	public String getEmailid() {
 		return emailid;
 	}
@@ -101,6 +106,24 @@ public class Students {
 	}
 	public void setFmobno(String fmobno) {
 		this.fmobno = fmobno;
+	}
+	public String getUregno() {
+		return uregno;
+	}
+	public void setUregno(String uregno) {
+		this.uregno = uregno;
+	}
+	public String getUrollno() {
+		return urollno;
+	}
+	public void setUrollno(String urollno) {
+		this.urollno = urollno;
+	}
+	public String getCursem() {
+		return cursem;
+	}
+	public void setCursem(String cursem) {
+		this.cursem = cursem;
 	}
 	public String getTnoe() {
 		return tnoe;
@@ -210,73 +233,63 @@ public class Students {
 	public void setDsper(String dsper) {
 		this.dsper = dsper;
 	}
-	public String getUregno() {
-		return uregno;
-	}
-	public void setUregno(String uregno) {
-		this.uregno = uregno;
-	}
-	public String getUrollno() {
-		return urollno;
-	}
-	public void setUrollno(String urollno) {
-		this.urollno = urollno;
-	}
-	public int getMarks1() {
+	public String getMarks1() {
 		return marks1;
 	}
-	public void setMarks1(int marks1) {
+	public void setMarks1(String marks1) {
 		this.marks1 = marks1;
 	}
-	public int getMarks2() {
+	public String getMarks2() {
 		return marks2;
 	}
-	public void setMarks2(int marks2) {
+	public void setMarks2(String marks2) {
 		this.marks2 = marks2;
 	}
-	public int getMarks3() {
+	public String getMarks3() {
 		return marks3;
 	}
-	public void setMarks3(int marks3) {
+	public void setMarks3(String marks3) {
 		this.marks3 = marks3;
 	}
-	public int getMarks4() {
+	public String getMarks4() {
 		return marks4;
 	}
-	public void setMarks4(int marks4) {
+	public void setMarks4(String marks4) {
 		this.marks4 = marks4;
 	}
-	public int getMarks5() {
+	public String getMarks5() {
 		return marks5;
 	}
-	public void setMarks5(int marks5) {
+	public void setMarks5(String marks5) {
 		this.marks5 = marks5;
 	}
-	public int getMarks6() {
+	public String getMarks6() {
 		return marks6;
 	}
-	public void setMarks6(int marks6) {
+	public void setMarks6(String marks6) {
 		this.marks6 = marks6;
 	}
-	public int getMarks7() {
+	public String getMarks7() {
 		return marks7;
 	}
-	public void setMarks7(int marks7) {
+	public void setMarks7(String marks7) {
 		this.marks7 = marks7;
 	}
-	public int getMarks8() {
+	public String getMarks8() {
 		return marks8;
 	}
-	public void setMarks8(int marks8) {
+	public void setMarks8(String marks8) {
 		this.marks8 = marks8;
 	}
-	public Students(String emailid, String password, String name, String gender, String fname, String foccupation,
-			String mname, String dob, String presentadsress, String permaddress, String pic, String smobno, String fmobno,
-			String tnoe, String tyop, String tboard, String tsname, String tmos, String tsper, String tactper,
-			String twnoe, String twyop, String twboard, String twsname, String twmos, String twsper, String twactper,
-			String dnou, String stream, String dyop, String dsper, String uregno, String urollno, int marks1, int marks2,
-			int marks3, int marks4, int marks5, int marks6, int marks7, int marks8) {
+	public Students(String userid, String emailid, String password, String name, String gender, String fname,
+			String foccupation, String mname, String dob, String presentadsress, String permaddress, String pic,
+			String smobno, String fmobno, String uregno, String urollno, String cursem, String tnoe, String tyop,
+			String tboard, String tsname, String tmos, String tsper, String tactper, String twnoe, String twyop,
+			String twboard, String twsname, String twmos, String twsper, String twactper, String dnou, String stream,
+			String dyop, String dsper, String marks1, String marks2, String marks3, String marks4, String marks5,
+			String marks6, String marks7, String marks8) {
 		super();
+		this.userid = userid;
 		this.emailid = emailid;
 		this.password = password;
 		this.name = name;
@@ -290,6 +303,9 @@ public class Students {
 		this.pic = pic;
 		this.smobno = smobno;
 		this.fmobno = fmobno;
+		this.uregno = uregno;
+		this.urollno = urollno;
+		this.cursem = cursem;
 		this.tnoe = tnoe;
 		this.tyop = tyop;
 		this.tboard = tboard;
@@ -308,8 +324,6 @@ public class Students {
 		this.stream = stream;
 		this.dyop = dyop;
 		this.dsper = dsper;
-		this.uregno = uregno;
-		this.urollno = urollno;
 		this.marks1 = marks1;
 		this.marks2 = marks2;
 		this.marks3 = marks3;
@@ -321,8 +335,6 @@ public class Students {
 	}
 	public Students() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
-	
-	
+			
 	}

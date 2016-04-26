@@ -1,7 +1,10 @@
 
 package com.student;
 import javax.swing.JOptionPane;
+
+import coordinator.CoordinatorHome;
 import coordinator.Coordinators;
+import teacher.TeacherHome;
 import teacher.Teachers;
 import com.hod.Hods;
 
@@ -170,7 +173,7 @@ public class Launcher extends JFrame {
 						String records[][]=new String[list.size()][2];
 						int r=0;
 						for(Students rr : list){
-							records[r][0]=rr.getEmailid();
+							records[r][0]=rr.getUserid();
 							records[r][1]=rr.getPassword();
 							if(userid.equals(records[r][0]) && pass.equals(records[r][1])){
 								flag=1;
@@ -205,7 +208,7 @@ public class Launcher extends JFrame {
 							set_User=userid;
 							System.out.println("Login successful");
 							//create the object of next window here
-							new Stu_Main();
+							new TeacherHome();
 							System.out.println("avb");
 							
 						}
@@ -232,7 +235,7 @@ public class Launcher extends JFrame {
 							set_User=userid;
 							System.out.println("Login successful");
 							//create the object of next window here
-							new Stu_Main();
+							new CoordinatorHome();
 							System.out.println("avb");
 							
 						}
@@ -370,16 +373,7 @@ public class Launcher extends JFrame {
 		frame.getContentPane().add(lblRegisterHere);
 		
 	}
-	/*@SuppressWarnings("deprecation")
-	public void actionPerformed(ActionEvent e) {
-		if(!tf1.getText().equals("")){
-            if(!pf1.getText().equals("")){
-               // getConnection();
-            }else{JOptionPane.showMessageDialog(null, "Enter Password");}
-        }else{JOptionPane.showMessageDialog(null, "Enter User Name");}
-    }*/
-	
-	
+		
 	public static SessionFactory createSessionFactory() {
 	    Configuration configuration = new Configuration();
 	    configuration.configure("hibernate.cfg.xml");

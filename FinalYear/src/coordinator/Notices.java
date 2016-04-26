@@ -7,7 +7,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="notices")
 public class Notices {
-	private String name,subject,date;
+	private String name,subject,date,Location;
 
 	@Id
 	public String getName() {
@@ -34,11 +34,21 @@ public class Notices {
 		this.date = date;
 	}
 
-	public Notices(String name, String subject, String date) {
+	
+	public String getLocation() {
+		return Location;
+	}
+
+	public void setLocation(String Location) {
+		this.Location = Location;
+	}
+
+	public Notices(String name, String subject, String date,String Location) {
 		super();
 		this.name = name;
 		this.subject = subject;
 		this.date = date;
+		this.Location = Location;
 	}
 
 	public Notices() {

@@ -94,7 +94,7 @@ public class Stu_Main {
 		btnProfile.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				ViewProfile p=new ViewProfile();
+				ViewProfile p=new ViewProfile(Launcher.set_User);
 			}
 		});
 		btnProfile.setBounds(39, 26, 103, 23);
@@ -182,8 +182,7 @@ public class Stu_Main {
 				Launcher li=new Launcher();
 				li.initialize();
 				JOptionPane.showMessageDialog(null, "Log Out");
-				JFrame frame = null;
-				frame.setDefaultCloseOperation(frame.DISPOSE_ON_CLOSE);
+				frame1.dispose();
 			}
 		});
 		btnLogout.setBounds(39, 370, 103, 23);

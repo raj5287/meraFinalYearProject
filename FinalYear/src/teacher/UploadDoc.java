@@ -88,6 +88,7 @@ public class UploadDoc extends JFrame {
 	void initialize() {
 		frame1 = new JFrame("Upload File ");
 		frame1.getContentPane().setFont(new Font("Times New Roman", Font.PLAIN, 11));
+		frame1.setVisible(true);
 		frame1.getContentPane().setBackground(Color.WHITE);
 				
 //		frame.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("bg1.png")))));

@@ -89,17 +89,17 @@ public class Stu_Regis extends JFrame {
 	private JPasswordField cnfpass;
 	JLabel lblUploadPic ;
 	String sname,fname,foccp,mname,sgender,dob,presentadd,permadd,pic,destination;
-	String tnoe,tyop,tboard,tsname,tmos;
-	int tsper,tactper;
-	String twnoe,twyop,twboard,twsname,twmos;
-	int twsper,twactper;
-	String dnou,dstream,dyop;
-	int dper;
+	String tnoe,tyop,tboard,tsname,tmos,tsper,tactper;
+	String twnoe,twyop,twboard,twsname,twmos,twsper,twactper;
+	String dnou,dstream,dyop,dper;
 	String email,pass;
-	String smobno,fmobno,uregno,urollno;
-	int marks1,marks2,marks3,marks4,marks5,marks6,marks7,marks8;
+	String smobno,fmobno,uregno,urollno,cursem;
+	String marks1,marks2,marks3,marks4,marks5,marks6,marks7,marks8;
 	private JTextField sourceFileTextField;
 	static String fileName;
+	private JTextField curSem;
+	private JTextField userID;
+	Path sourcePath,destinationPath;
 	
 	public ImageIcon ResizeImage(String ImagePath)
 	{ 
@@ -248,17 +248,8 @@ public class Stu_Regis extends JFrame {
 				destination = "E:/" + fileName;
 
 				File destinationFile = new File(destination);
-				Path sourcePath = sourceFile.toPath();
-				Path destinationPath = destinationFile.toPath();
-				try {
-					Files.copy(sourcePath, destinationPath);
-					System.out.print("File Copied");
-				} catch (IOException ex) {
-					ex.printStackTrace();
-					System.out.print("File NOt Copied");
-				}
-
-				
+				sourcePath = sourceFile.toPath();
+				destinationPath = destinationFile.toPath();
 			}
 		});
 		
@@ -402,8 +393,8 @@ public class Stu_Regis extends JFrame {
 				tboard=tBoard.getText();
 				tsname=tSname.getText();
 				tmos=tMos.getText();
-				tsper=Integer.parseInt(tSper.getText());
-				tactper=Integer.parseInt(tAper.getText());
+				tsper=(tSper.getText());
+				tactper=(tAper.getText());
 			}
 		});
 		btnContinue1.addActionListener(new ActionListener() {
@@ -490,8 +481,8 @@ public class Stu_Regis extends JFrame {
 				twboard=twBoard.getText();
 				twsname=twSname.getText();
 				twmos=twMos.getText();
-				twsper=Integer.parseInt(twSper.getText());
-				twactper=Integer.parseInt(twAper.getText());
+				twsper=(twSper.getText());
+				twactper=(twAper.getText());
 				
 			}
 		});
@@ -547,7 +538,7 @@ public class Stu_Regis extends JFrame {
 				dnou=dNou.getText();
 				dyop=dYop.getText();
 				dstream=dStream.getText();
-				dper=Integer.parseInt(dPer.getText());
+				dper=(dPer.getText());
 				
 			}
 		});
@@ -659,24 +650,36 @@ public class Stu_Regis extends JFrame {
 		pane2.add(Sem8);
 		Sem8.setColumns(10);
 		
+		JLabel lblCurrentSemester = new JLabel("Current Semester");
+		lblCurrentSemester.setBounds(444, 28, 94, 14);
+		pane2.add(lblCurrentSemester);
+		
+		curSem = new JTextField();
+		curSem.setBounds(567, 25, 86, 20);
+		pane2.add(curSem);
+		curSem.setColumns(10);
+		
 		JButton btnContinue_2 = new JButton("Continue ");
 		btnContinue_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				tabbedPane_1.setSelectedIndex(2);
 				uregno=(uRegno.getText());
 				urollno=(uRollno.getText());
-				marks1=Integer.parseInt(Sem1.getText());
-				marks2=Integer.parseInt(Sem2.getText());
-				marks3=Integer.parseInt(Sem3.getText());
-				marks4=Integer.parseInt(textField.getText());
-				marks5=Integer.parseInt(Sem5.getText());
-				marks6 =Integer.parseInt(Sem5.getText());
-				marks7=Integer.parseInt(Sem7.getText());
-				marks8=Integer.parseInt(Sem8.getText());
+				cursem=curSem.getText();
+				marks1=(Sem1.getText());
+				marks2=(Sem2.getText());
+				marks3=(Sem3.getText());
+				marks4=(textField.getText());
+				marks5=(Sem5.getText());
+				marks6 =(Sem5.getText());
+				marks7=(Sem7.getText());
+				marks8=(Sem8.getText());
 			}
 		});
 		btnContinue_2.setBounds(586, 287, 117, 35);
 		pane2.add(btnContinue_2);
+		
+		
 		
 		
 		JPanel panel_4 = new JPanel();
@@ -710,37 +713,56 @@ public class Stu_Regis extends JFrame {
 		Email.setBounds(161, 105, 200, 20);
 		panel_4.add(Email);
 		Email.setColumns(10);
+		
+		JLabel lblUserId = new JLabel("User Id:");
+		lblUserId.setBounds(21, 161, 46, 14);
+		panel_4.add(lblUserId);
+		
+		userID = new JTextField();
+		userID.setText("");
+		userID.setBounds(161, 158, 162, 20);
+		panel_4.add(userID);
+		userID.setColumns(10);
+		
                 
-                JLabel lblPassword = new JLabel("Password : ");
-		lblPassword.setBounds(21, 158, 130, 14);
+        JLabel lblPassword = new JLabel("Password : ");
+		lblPassword.setBounds(21, 212, 100, 14);
 		panel_4.add(lblPassword);
 		
 		password = new JPasswordField();
-		password.setBounds(161, 155, 100, 20);
+		password.setBounds(161, 209, 100, 20);
 		panel_4.add(password);
 		password.setColumns(10);
                 
         JLabel lblConfirmPassword = new JLabel("Confirm Password :");
-		lblConfirmPassword.setBounds(21, 195, 130, 14);
+		lblConfirmPassword.setBounds(21, 255, 130, 14);
 		panel_4.add(lblConfirmPassword);
 		
 		cnfpass = new JPasswordField();
-		cnfpass.setBounds(161, 192, 100, 20);
+		cnfpass.setBounds(161, 252, 100, 20);
 		panel_4.add(cnfpass);
 		
 		JButton btnNewButton_1 = new JButton("Submit");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				String userid=userID.getText();
 				email=Email.getText();
 				smobno=(sPhnno.getText());
 				fmobno=(fPhnno.getText());
-				/*if((password.getPassword()).equals(cnfpass.getPassword()))
-				{*/
+				
+				try {
+					Files.copy(sourcePath, destinationPath);
+					System.out.print("File Copied");
+				} catch (IOException ex) {
+					ex.printStackTrace();
+					System.out.print("File NOt Copied");
+				}
 					String pass=new String (password.getPassword());
 				//adding data to database
 				SessionFactory factory=createSessionFactory();
 				Session s=factory.openSession();
 				Students ob =new Students();
+				ob.setUserid(userid);
 				ob.setEmailid(email);
 				ob.setPassword(pass);
 				ob.setName(sname);
@@ -759,21 +781,22 @@ public class Stu_Regis extends JFrame {
 				ob.setTboard(tboard);
 				ob.setTsname(tsname);
 				ob.setTmos(tmos);
-				ob.setTsper(String.valueOf(tsper));
-				ob.setTactper(String.valueOf(tactper));
+				ob.setTsper(tsper);
+				ob.setTactper(tactper);
 				ob.setTwnoe(twnoe);
 				ob.setTwyop(twyop);
 				ob.setTwboard(tboard);
 				ob.setTwsname(twsname);
 				ob.setTwmos(twmos);
-				ob.setTwsper(String.valueOf(twsper));
-				ob.setTwactper(String.valueOf(twactper));
+				ob.setTwsper(twsper);
+				ob.setTwactper(twactper);
 				ob.setDnou(dnou);
 				ob.setStream(dstream);
 				ob.setDyop(dyop);
-				ob.setDsper(String.valueOf(dper));
+				ob.setDsper(dper);
 				ob.setUregno(uregno);
 				ob.setUrollno(urollno);
+				ob.setCursem(cursem);
 				ob.setMarks1(marks1);
 				ob.setMarks2(marks2);
 				ob.setMarks3(marks3);
@@ -789,14 +812,16 @@ public class Stu_Regis extends JFrame {
 				tr.commit();
 				s.close();
 				factory.close();
-				}
-				/*else
-				{JOptionPane.showMessageDialog(null, "Re-Type Password");}*/
 				
-			//}
+				JOptionPane.showMessageDialog(null, "Registered Successfully");
+				frame1.dispose();
+				
+				
+			}
 		});
 		btnNewButton_1.setBounds(579, 318, 148, 43);
 		panel_4.add(btnNewButton_1);
+		
 		
 		
 		

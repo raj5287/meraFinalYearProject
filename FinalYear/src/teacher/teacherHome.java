@@ -6,6 +6,8 @@ import java.awt.Image;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import com.student.Launcher;
+
 import coordinator.SearchStudent;
 
 import javax.swing.ImageIcon;
@@ -50,9 +52,10 @@ public class TeacherHome {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame("SIS");
+		frame = new JFrame("Logged in as::"+Launcher.set_User);
 		frame.getContentPane().setBackground(Color.WHITE);
 		frame.setBounds(100, 100, 827, 475);
+		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -74,7 +77,7 @@ public class TeacherHome {
 			public void actionPerformed(ActionEvent arg0) {
 		
 				@SuppressWarnings("unused")
-				View_Profile p=new View_Profile();
+				View_Profile p=new View_Profile(Launcher.set_User);
 				
 			}
 		});
@@ -100,7 +103,7 @@ public class TeacherHome {
 			//	LogIn li=new LogIn();
 			//	li.initialize();
 				JOptionPane.showMessageDialog(null, "Log Out");
-				frame.setDefaultCloseOperation(frame.DISPOSE_ON_CLOSE);
+				frame.dispose();
 				
 				
 			}
@@ -119,6 +122,12 @@ public class TeacherHome {
 		frame.getContentPane().add(btnDocuments);
 		
 		JButton btnNewButton_1 = new JButton("Upload Notice");
+		btnNewButton_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new UploadNotice();
+			}
+		});
 		btnNewButton_1.setBounds(31, 195, 113, 23);
 		frame.getContentPane().add(btnNewButton_1);
 		

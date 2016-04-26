@@ -52,9 +52,10 @@ public class SearchStudent {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
+		frame = new JFrame("Search Student");
 		frame.getContentPane().setFont(new Font("Times New Roman", Font.BOLD, 12));
 		frame.setBounds(100, 100, 744, 417);
+		frame.setVisible(true);
 		frame.getContentPane().setBackground(Color.WHITE);
 		frame.getContentPane().setLayout(null);
 		
@@ -96,32 +97,43 @@ public class SearchStudent {
 	    
 	    rdbtnName.setMnemonic(KeyEvent.VK_C);
 	    rdbtnUniversityRollNo.setMnemonic(KeyEvent.VK_M);
-	    
-	    
-		
-		JButton btnSearch = new JButton("Search");
-		btnSearch.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				System.out.println(searchBy);
-				new ViewStudentData();
-			}
-		});
-		btnSearch.setFont(new Font("Times New Roman", Font.BOLD, 12));
-		btnSearch.setBounds(249, 181, 200, 50);
-		frame.getContentPane().add(btnSearch);
 		
 		String[] semester={"1","2","3","4","5","6","7","8"};
 		JComboBox comboBox = new JComboBox(semester);
 		comboBox.setBounds(603, 23, 46, 20);
 		frame.getContentPane().add(comboBox);
 		sem= (String) comboBox.getSelectedItem();
-		studentSearch=studentName.getText();
+		
 		
 		JLabel lblSem = new JLabel("Sem");
 		lblSem.setFont(new Font("Times New Roman", Font.BOLD, 12));
 		lblSem.setBounds(528, 26, 46, 14);
 		frame.getContentPane().add(lblSem);
+		
+		JButton btnSearch = new JButton("Search");
+		btnSearch.setFont(new Font("Times New Roman", Font.BOLD, 12));
+		btnSearch.setBounds(249, 181, 200, 50);
+		frame.getContentPane().add(btnSearch);
+		
+		JButton btnClose = new JButton("Close");
+		btnClose.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				frame.dispose();
+			}
+		});
+		btnClose.setFont(new Font("Times New Roman", Font.BOLD, 12));
+		btnClose.setBounds(609, 307, 89, 23);
+		frame.getContentPane().add(btnClose);
+		btnSearch.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				studentSearch=studentName.getText();
+				System.out.println(studentSearch);
+				System.out.println(searchBy);
+				new ViewStudentData();
+			}
+		});
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 }

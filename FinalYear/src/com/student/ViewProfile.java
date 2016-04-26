@@ -34,6 +34,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 import javax.swing.UIManager;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 @SuppressWarnings("unused")
 public class ViewProfile extends JFrame {
@@ -47,6 +49,7 @@ public class ViewProfile extends JFrame {
 	private SessionFactory factory;
 	static String picPath;
 	JLabel imgLabel ;
+	String user;
 	
 	/**
 	 * Launch the application.
@@ -68,6 +71,11 @@ public class ViewProfile extends JFrame {
 	 * Create the application.
 	 */
 	public ViewProfile() {
+		initialize();
+	}
+	
+	public ViewProfile(String x){
+		user=x;
 		initialize();
 	}
 
@@ -110,6 +118,12 @@ public class ViewProfile extends JFrame {
 		frame1.getContentPane().add(lblEmailId);
 		
 		JButton btnBack = new JButton("Back");
+		btnBack.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				frame1.dispose();
+			}
+		});
 		btnBack.setBounds(563, 343, 89, 23);
 		frame1.getContentPane().add(btnBack);
 		
@@ -147,13 +161,12 @@ public class ViewProfile extends JFrame {
 		SessionFactory f=createSessionFactory();
 		factory=f;
 		Session s=factory.openSession();
-		Object ob=s.load(Students.class,new String(Launcher.set_User));
+		Object ob=s.load(Students.class,new String(user));
 		Students stu=(Students) ob;
 		textField.setText(stu.getName());
 		textField_1.setText(stu.getFname());
 		textField_2.setText(stu.getPresentadsress());
-		String mob=String.valueOf(stu.getSmobno());
-		textField_3.setText(mob);
+		textField_3.setText(stu.getSmobno());
 		textField_4.setText(stu.getEmailid());
 		picPath=stu.getPic();
 		
