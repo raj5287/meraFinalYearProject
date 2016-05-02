@@ -43,6 +43,7 @@ import java.awt.SystemColor;
 import javax.swing.UIManager;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JCheckBox;
 
 @SuppressWarnings("unused")
 public class Stu_Regis extends JFrame {
@@ -93,11 +94,10 @@ public class Stu_Regis extends JFrame {
 	String twnoe,twyop,twboard,twsname,twmos,twsper,twactper;
 	String dnou,dstream,dyop,dper;
 	String email,pass;
-	String smobno,fmobno,uregno,urollno,cursem;
+	String smobno,fmobno,uregno,urollno,curyear;
 	String marks1,marks2,marks3,marks4,marks5,marks6,marks7,marks8;
 	private JTextField sourceFileTextField;
 	static String fileName;
-	private JTextField curSem;
 	private JTextField userID;
 	Path sourcePath,destinationPath;
 	
@@ -236,20 +236,6 @@ public class Stu_Regis extends JFrame {
 		btnContinue.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tabbedPane_1.setSelectedIndex(1);
-				
-				sname=name.getText();
-				fname=fName.getText();
-				foccp=fOccup.getText();
-				mname=mName.getText();
-				presentadd=presentAdd.getText();
-				permadd=perAdd.getText();
-				
-				File sourceFile = new File(sourceFileTextField.getText());
-				destination = "E:/" + fileName;
-
-				File destinationFile = new File(destination);
-				sourcePath = sourceFile.toPath();
-				destinationPath = destinationFile.toPath();
 			}
 		});
 		
@@ -279,19 +265,14 @@ public class Stu_Regis extends JFrame {
 		day= new JComboBox(date);
 		day.setBounds(172, 232, 46, 20);
 		panel.add(day);
-		String day1 = (String) day.getSelectedItem();//getting day
-		
+				
 		month= new JComboBox(mnth);
 		month.setBounds(213, 232, 45, 20);
-		panel.add(month);
-		String month1 = (String) month.getSelectedItem();//getting month
+		panel.add(month);		
 		
 		JComboBox year = new JComboBox(yr);
 		year.setBounds(258, 232, 58, 20);
 		panel.add(year);
-		String year1 = (String) year.getSelectedItem();//getting year
-		
-		dob=day1+month1+year1;//set it in db
 		
 		presentAdd = new JTextField();
 		presentAdd.setBounds(172, 277, 363, 20);
@@ -388,14 +369,7 @@ public class Stu_Regis extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				tabbedPane.setSelectedIndex(1);
-				tnoe=tNoe.getText();
-				tyop=tYop.getText();
-				tboard=tBoard.getText();
-				tsname=tSname.getText();
-				tmos=tMos.getText();
-				tsper=(tSper.getText());
-				tactper=(tAper.getText());
-			}
+				}
 		});
 		btnContinue1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -476,15 +450,7 @@ public class Stu_Regis extends JFrame {
 		btnContinue2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				tabbedPane.setSelectedIndex(2);
-				twnoe=twNoe.getText();
-				twyop=twYop.getText();
-				twboard=twBoard.getText();
-				twsname=twSname.getText();
-				twmos=twMos.getText();
-				twsper=(twSper.getText());
-				twactper=(twAper.getText());
-				
-			}
+				}
 		});
 		btnContinue2.setBounds(565, 320, 147, 36);
 		panel_1.add(btnContinue2);
@@ -535,12 +501,7 @@ public class Stu_Regis extends JFrame {
 		btnContinue_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				tabbedPane.setSelectedIndex(3);
-				dnou=dNou.getText();
-				dyop=dYop.getText();
-				dstream=dStream.getText();
-				dper=(dPer.getText());
-				
-			}
+				}
 		});
 		btnContinue_1.setBounds(576, 283, 143, 39);
 		panel_2.add(btnContinue_1);
@@ -650,41 +611,90 @@ public class Stu_Regis extends JFrame {
 		pane2.add(Sem8);
 		Sem8.setColumns(10);
 		
-		JLabel lblCurrentSemester = new JLabel("Current Semester");
+		JLabel lblCurrentSemester = new JLabel("Current Year:");
 		lblCurrentSemester.setBounds(444, 28, 94, 14);
 		pane2.add(lblCurrentSemester);
 		
-		curSem = new JTextField();
-		curSem.setBounds(567, 25, 86, 20);
-		pane2.add(curSem);
-		curSem.setColumns(10);
+		String[] currentyear={"1","2","3","4"};
+		JComboBox comboBox = new JComboBox(currentyear);
+		comboBox.setBounds(558, 25, 39, 20);
+		pane2.add(comboBox);
 		
+				
 		JButton btnContinue_2 = new JButton("Continue ");
 		btnContinue_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				tabbedPane_1.setSelectedIndex(2);
-				uregno=(uRegno.getText());
-				urollno=(uRollno.getText());
-				cursem=curSem.getText();
-				marks1=(Sem1.getText());
-				marks2=(Sem2.getText());
-				marks3=(Sem3.getText());
-				marks4=(textField.getText());
-				marks5=(Sem5.getText());
-				marks6 =(Sem5.getText());
-				marks7=(Sem7.getText());
-				marks8=(Sem8.getText());
-			}
+				}
 		});
 		btnContinue_2.setBounds(586, 287, 117, 35);
 		pane2.add(btnContinue_2);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBackground(UIManager.getColor("EditorPane.disabledBackground"));
+		tabbedPane_1.addTab("Area of Interest", null, panel_3, null);
+		panel_3.setLayout(null);
+		
+		JCheckBox chckbxSports = new JCheckBox("Sports");
+		chckbxSports.setBackground(UIManager.getColor("EditorPane.disabledBackground"));
+		chckbxSports.setBounds(22, 37, 97, 23);
+		panel_3.add(chckbxSports);
+		
+		JCheckBox chckbxDance = new JCheckBox("Dance");
+		chckbxDance.setBackground(UIManager.getColor("EditorPane.disabledBackground"));
+		chckbxDance.setBounds(22, 78, 97, 23);
+		panel_3.add(chckbxDance);
+		
+		JCheckBox chckbxSinging = new JCheckBox("Singing");
+		chckbxSinging.setBackground(UIManager.getColor("EditorPane.disabledBackground"));
+		chckbxSinging.setBounds(22, 120, 97, 23);
+		panel_3.add(chckbxSinging);
+		
+		JCheckBox chckbxPainting = new JCheckBox("Painting");
+		chckbxPainting.setBackground(UIManager.getColor("EditorPane.disabledBackground"));
+		chckbxPainting.setBounds(22, 165, 97, 23);
+		panel_3.add(chckbxPainting);
+		
+		JCheckBox chckbxWriting = new JCheckBox("Writing");
+		chckbxWriting.setBackground(UIManager.getColor("EditorPane.disabledBackground"));
+		chckbxWriting.setBounds(222, 165, 97, 23);
+		panel_3.add(chckbxWriting);
+		
+		JCheckBox chckbxActing = new JCheckBox("Acting");
+		chckbxActing.setBackground(UIManager.getColor("EditorPane.disabledBackground"));
+		chckbxActing.setBounds(222, 37, 97, 23);
+		panel_3.add(chckbxActing);
+		
+		JCheckBox chckbxTechnical = new JCheckBox("Technical");
+		chckbxTechnical.setBackground(UIManager.getColor("EditorPane.disabledBackground"));
+		chckbxTechnical.setBounds(222, 78, 97, 23);
+		panel_3.add(chckbxTechnical);
+		
+		JCheckBox chckbxOrganizerOfEvents = new JCheckBox("Organizer of Events");
+		chckbxOrganizerOfEvents.setBackground(UIManager.getColor("EditorPane.disabledBackground"));
+		chckbxOrganizerOfEvents.setBounds(222, 120, 143, 23);
+		panel_3.add(chckbxOrganizerOfEvents);
+		
+		JButton btnNewButton = new JButton("Continue");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				tabbedPane_1.setSelectedIndex(3);
+			}
+		});
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnNewButton.setBounds(557, 323, 157, 39);
+		panel_3.add(btnNewButton);
 		
 		
 		
 		
 		JPanel panel_4 = new JPanel();
 		panel_4.setBackground(UIManager.getColor("EditorPane.disabledBackground"));
-		tabbedPane_1.addTab("Other", null, panel_4, null);
+		tabbedPane_1.addTab("Login Details", null, panel_4, null);
 		panel_4.setLayout(null);
 		
 		JLabel lblStudentsPhoneNo = new JLabel("Student's Phone No :");
@@ -745,10 +755,64 @@ public class Stu_Regis extends JFrame {
 		JButton btnNewButton_1 = new JButton("Submit");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
+				sname=name.getText();
+				fname=fName.getText();
+				foccp=fOccup.getText();
+				mname=mName.getText();
+				presentadd=presentAdd.getText();
+				permadd=perAdd.getText();
+				String day1 = (String) day.getSelectedItem();//getting day
+				String month1 = (String) month.getSelectedItem();//getting month
+				String year1 = (String) year.getSelectedItem();//getting year
+				dob=day1+month1+year1;//set it in db
+				
+				tnoe=tNoe.getText();
+				tyop=tYop.getText();
+				tboard=tBoard.getText();
+				tsname=tSname.getText();
+				tmos=tMos.getText();
+				tsper=(tSper.getText());
+				tactper=(tAper.getText());
+				
+				twnoe=twNoe.getText();
+				twyop=twYop.getText();
+				twboard=twBoard.getText();
+				twsname=twSname.getText();
+				twmos=twMos.getText();
+				twsper=(twSper.getText());
+				twactper=(twAper.getText());
+				
+				dnou=dNou.getText();
+				dyop=dYop.getText();
+				dstream=dStream.getText();
+				dper=(dPer.getText());
+			
+				uregno=(uRegno.getText());
+				urollno=(uRollno.getText());
+				curyear = (String) comboBox.getSelectedItem();
+				marks1=(Sem1.getText());
+				marks2=(Sem2.getText());
+				marks3=(Sem3.getText());
+				marks4=(textField.getText());
+				marks5=(Sem5.getText());
+				marks6 =(Sem5.getText());
+				marks7=(Sem7.getText());
+				marks8=(Sem8.getText());
+			
+				
 				String userid=userID.getText();
 				email=Email.getText();
 				smobno=(sPhnno.getText());
 				fmobno=(fPhnno.getText());
+				String folderLocation="E:/"+userid;
+				new File(folderLocation).mkdir();
+				File sourceFile = new File(sourceFileTextField.getText());
+				destination = "E:/"+userid+"/" + fileName;
+
+				File destinationFile = new File(destination);
+				sourcePath = sourceFile.toPath();
+				destinationPath = destinationFile.toPath();
 				
 				try {
 					Files.copy(sourcePath, destinationPath);
@@ -796,7 +860,7 @@ public class Stu_Regis extends JFrame {
 				ob.setDsper(dper);
 				ob.setUregno(uregno);
 				ob.setUrollno(urollno);
-				ob.setCursem(cursem);
+				ob.setCuryear(curyear);
 				ob.setMarks1(marks1);
 				ob.setMarks2(marks2);
 				ob.setMarks3(marks3);
@@ -805,6 +869,7 @@ public class Stu_Regis extends JFrame {
 				ob.setMarks6(marks6);
 				ob.setMarks7(marks7);
 				ob.setMarks8(marks8);
+				ob.setFlocation(folderLocation);
 				
 				Transaction tr= s.beginTransaction();
 				s.save(ob);

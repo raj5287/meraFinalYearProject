@@ -129,32 +129,32 @@ public class ViewProfile extends JFrame {
 		
 		textField = new JTextField();
 		textField.setEditable(false);
-		textField.setBounds(169, 27, 86, 20);
+		textField.setBounds(169, 27, 236, 20);
 		frame1.getContentPane().add(textField);
 		textField.setColumns(10);
 		
 		textField_1 = new JTextField();
 		textField_1.setEditable(false);
 		textField_1.setColumns(10);
-		textField_1.setBounds(169, 77, 86, 20);
+		textField_1.setBounds(169, 77, 236, 20);
 		frame1.getContentPane().add(textField_1);
 		
 		textField_2 = new JTextField();
 		textField_2.setEditable(false);
 		textField_2.setColumns(10);
-		textField_2.setBounds(169, 127, 86, 20);
+		textField_2.setBounds(169, 127, 236, 20);
 		frame1.getContentPane().add(textField_2);
 		
 		textField_3 = new JTextField();
 		textField_3.setEditable(false);
 		textField_3.setColumns(10);
-		textField_3.setBounds(169, 177, 86, 20);
+		textField_3.setBounds(169, 177, 151, 20);
 		frame1.getContentPane().add(textField_3);
 		
 		textField_4 = new JTextField();
 		textField_4.setEditable(false);
 		textField_4.setColumns(10);
-		textField_4.setBounds(169, 227, 86, 20);
+		textField_4.setBounds(169, 227, 236, 20);
 		frame1.getContentPane().add(textField_4);
 		
 		
@@ -174,6 +174,17 @@ public class ViewProfile extends JFrame {
 		imgLabel.setBounds(523, 69, 169, 171);
 		frame1.getContentPane().add(imgLabel);
 		imgLabel.setIcon(ResizeImage(picPath));
+		
+		JButton btnEdit = new JButton("Edit");
+		btnEdit.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new EditSprofile(user);
+				frame1.dispose();
+			}
+		});
+		btnEdit.setBounds(370, 343, 89, 23);
+		frame1.getContentPane().add(btnEdit);
 		
 	}
 	

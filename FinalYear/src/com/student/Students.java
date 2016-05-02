@@ -13,21 +13,28 @@ public class Students {
 	
 	
 	private String userid,emailid, password,name,gender,fname,foccupation, mname,dob,presentadsress, permaddress,pic;
-	private String smobno,fmobno,uregno,urollno,cursem;
+	private String smobno,fmobno,uregno,urollno,curyear;
 	//tenth details
 	private String tnoe,tyop,tboard,tsname,tmos,tsper,tactper;
 	//twelfth details
-	private String twnoe,twyop,twboard,twsname,twmos,twsper,twactper;
+	private String twnoe,twyop,twboard,twsname,twmos,twsper,twactper,aoi;
 	//diploma details
 	private String dnou,stream,dyop,dsper;
 	//b.tech details
-	private String marks1,marks2,marks3,marks4,marks5,marks6,marks7,marks8;
+	private String marks1,marks2,marks3,marks4,marks5,marks6,marks7,marks8,flocation;
 	@Id
 	public String getUserid() {
 		return userid;
 	}
 	public void setUserid(String userid) {
 		this.userid = userid;
+	}
+	
+	public String getAoi() {
+		return aoi;
+	}
+	public void setAoi(String aoi) {
+		this.aoi = aoi;
 	}
 	public String getEmailid() {
 		return emailid;
@@ -119,11 +126,11 @@ public class Students {
 	public void setUrollno(String urollno) {
 		this.urollno = urollno;
 	}
-	public String getCursem() {
-		return cursem;
+	public String getCuryear() {
+		return curyear;
 	}
-	public void setCursem(String cursem) {
-		this.cursem = cursem;
+	public void setCuryear(String cursem) {
+		this.curyear = cursem;
 	}
 	public String getTnoe() {
 		return tnoe;
@@ -281,13 +288,20 @@ public class Students {
 	public void setMarks8(String marks8) {
 		this.marks8 = marks8;
 	}
+	
+	public String getFlocation() {
+		return flocation;
+	}
+	public void setFlocation(String flocation) {
+		this.flocation = flocation;
+	}
 	public Students(String userid, String emailid, String password, String name, String gender, String fname,
 			String foccupation, String mname, String dob, String presentadsress, String permaddress, String pic,
 			String smobno, String fmobno, String uregno, String urollno, String cursem, String tnoe, String tyop,
 			String tboard, String tsname, String tmos, String tsper, String tactper, String twnoe, String twyop,
 			String twboard, String twsname, String twmos, String twsper, String twactper, String dnou, String stream,
 			String dyop, String dsper, String marks1, String marks2, String marks3, String marks4, String marks5,
-			String marks6, String marks7, String marks8) {
+			String marks6, String marks7, String marks8,String aoi,String flocation) {
 		super();
 		this.userid = userid;
 		this.emailid = emailid;
@@ -305,7 +319,7 @@ public class Students {
 		this.fmobno = fmobno;
 		this.uregno = uregno;
 		this.urollno = urollno;
-		this.cursem = cursem;
+		this.curyear = cursem;
 		this.tnoe = tnoe;
 		this.tyop = tyop;
 		this.tboard = tboard;
@@ -332,6 +346,8 @@ public class Students {
 		this.marks6 = marks6;
 		this.marks7 = marks7;
 		this.marks8 = marks8;
+		this.aoi = aoi;
+		this.flocation = flocation;
 	}
 	public Students() {
 		super();

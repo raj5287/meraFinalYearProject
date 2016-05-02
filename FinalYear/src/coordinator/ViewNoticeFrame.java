@@ -26,11 +26,11 @@ public class ViewNoticeFrame extends JFrame {
 		String hql="from Notices";
 		Query q=s.createQuery(hql);
 		
-		List<Notices> list=q.list();
+		List<CNotices> list=q.list();
 		
 		String records[][]=new String[list.size()][3];
 		int r=0;
-		for(Notices rr : list){
+		for(CNotices rr : list){
 			records[r][0]=rr.getName();
 			records[r][1]=rr.getSubject();
 			records[r][2]=rr.getDate();

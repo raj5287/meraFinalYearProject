@@ -51,6 +51,7 @@ public class View_Adacemic {
 	private JTextField tSper;	//standard marks in twelfth
 	private JTextField tAper;	//actual marks in twelfth
 	String user;
+	private JTextField textField;
 	
 	/**
 	 * Launch the application.
@@ -217,36 +218,43 @@ public class View_Adacemic {
 		panel_1.add(lblNewLabel_14);
 		
 		twNoe = new JTextField();
+		twNoe.setEditable(false);
 		twNoe.setBounds(181, 11, 152, 20);
 		panel_1.add(twNoe);
 		twNoe.setColumns(10);
 		
 		twYop = new JTextField();
+		twYop.setEditable(false);
 		twYop.setBounds(181, 47, 152, 20);
 		panel_1.add(twYop);
 		twYop.setColumns(10);
 		
 		twBoard = new JTextField();
+		twBoard.setEditable(false);
 		twBoard.setBounds(181, 88, 152, 20);
 		panel_1.add(twBoard);
 		twBoard.setColumns(10);
 		
 		twSname = new JTextField();
+		twSname.setEditable(false);
 		twSname.setBounds(181, 131, 152, 20);
 		panel_1.add(twSname);
 		twSname.setColumns(10);
 		
 		twMos = new JTextField();
+		twMos.setEditable(false);
 		twMos.setBounds(181, 177, 152, 20);
 		panel_1.add(twMos);
 		twMos.setColumns(10);
 		
 		twSper = new JTextField();
+		twSper.setEditable(false);
 		twSper.setBounds(181, 219, 60, 20);
 		panel_1.add(twSper);
 		twSper.setColumns(10);
 		
 		twAper = new JTextField();
+		twAper.setEditable(false);
 		twAper.setBounds(181, 263, 60, 20);
 		panel_1.add(twAper);
 		twAper.setColumns(10);
@@ -283,21 +291,25 @@ public class View_Adacemic {
 		panel_2.add(lblNewLabel_6);
 		
 		dNou = new JTextField();
+		dNou.setEditable(false);
 		dNou.setBounds(205, 32, 160, 20);
 		panel_2.add(dNou);
 		dNou.setColumns(10);
 		
 		dStream = new JTextField();
+		dStream.setEditable(false);
 		dStream.setBounds(205, 75, 160, 20);
 		panel_2.add(dStream);
 		dStream.setColumns(10);
 		
 		dYop = new JTextField();
+		dYop.setEditable(false);
 		dYop.setBounds(205, 119, 80, 20);
 		panel_2.add(dYop);
 		dYop.setColumns(10);
 		
 		dPer = new JTextField();
+		dPer.setEditable(false);
 		dPer.setBounds(205, 168, 80, 20);
 		panel_2.add(dPer);
 		dPer.setColumns(10);
@@ -312,15 +324,6 @@ public class View_Adacemic {
 		btnContinue_1.setBounds(576, 283, 143, 39);
 		panel_2.add(btnContinue_1);
 		
-		JButton btnSkip = new JButton("Skip");
-		btnSkip.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				tabbedPane.setSelectedIndex(3);	
-			}
-		});
-		btnSkip.setBounds(439, 291, 89, 23);
-		panel_2.add(btnSkip);
-		
 		JPanel pane2 = new JPanel();
 		pane2.setBackground(UIManager.getColor("EditorPane.disabledBackground"));
 		tabbedPane.addTab("B.Tech", null, pane2, null);
@@ -333,9 +336,19 @@ public class View_Adacemic {
 				
 			}
 		});
-		btnContinue_2.setBounds(586, 287, 117, 35);
+		btnContinue_2.setBounds(595, 310, 117, 35);
 		pane2.add(btnContinue_2);
 		
+
+		JLabel lblCurrentYear = new JLabel("Current Year");
+		lblCurrentYear.setBounds(21, 11, 97, 14);
+		pane2.add(lblCurrentYear);
+		
+		textField = new JTextField();
+		textField.setEditable(false);
+		textField.setBounds(104, 8, 86, 20);
+		pane2.add(textField);
+		textField.setColumns(10);
 		
 		
 		JLabel lblSem1 = new JLabel("Sem 1 :");
@@ -343,6 +356,7 @@ public class View_Adacemic {
 		pane2.add(lblSem1);
 		
 		sem1 = new JTextField();
+		sem1.setEditable(false);
 		sem1.setBounds(104, 49, 86, 20);
 		pane2.add(sem1);
 		sem1.setColumns(10);
@@ -352,6 +366,7 @@ public class View_Adacemic {
 		pane2.add(lblSem2);
 		
 		sem2 = new JTextField();
+		sem2.setEditable(false);
 		sem2.setBounds(104, 113, 86, 20);
 		pane2.add(sem2);
 		sem2.setColumns(10);
@@ -361,6 +376,7 @@ public class View_Adacemic {
 		pane2.add(lblSem3);
 		
 		sem3 = new JTextField();
+		sem3.setEditable(false);
 		sem3.setBounds(104, 171, 86, 20);
 		pane2.add(sem3);
 		sem3.setColumns(10);
@@ -370,6 +386,7 @@ public class View_Adacemic {
 		pane2.add(lblSem4);
 		
 		sem4 = new JTextField();
+		sem4.setEditable(false);
 		sem4.setBounds(104, 238, 86, 20);
 		pane2.add(sem4);
 		sem4.setColumns(10);
@@ -379,6 +396,7 @@ public class View_Adacemic {
 		pane2.add(lblSem5);
 		
 		sem5 = new JTextField();
+		sem5.setEditable(false);
 		sem5.setBounds(399, 49, 86, 20);
 		pane2.add(sem5);
 		sem5.setColumns(10);
@@ -388,6 +406,7 @@ public class View_Adacemic {
 		pane2.add(lblSem6);
 		
 		sem6 = new JTextField();
+		sem6.setEditable(false);
 		sem6.setBounds(399, 113, 86, 20);
 		pane2.add(sem6);
 		sem6.setColumns(10);
@@ -397,6 +416,7 @@ public class View_Adacemic {
 		pane2.add(lblSem7);
 		
 		sem7 = new JTextField();
+		sem7.setEditable(false);
 		sem7.setBounds(399, 171, 86, 20);
 		pane2.add(sem7);
 		sem7.setColumns(10);
@@ -406,6 +426,7 @@ public class View_Adacemic {
 		pane2.add(lblSem8);
 		
 		sem8 = new JTextField();
+		sem8.setEditable(false);
 		sem8.setBounds(399, 238, 86, 20);
 		pane2.add(sem8);
 		sem8.setColumns(10);
@@ -440,6 +461,16 @@ public class View_Adacemic {
 		sem6.setText(stu.getMarks6());
 		sem7.setText(stu.getMarks7());
 		sem8.setText(stu.getMarks8());
+		
+		JButton btnEdit = new JButton("Edit");
+		btnEdit.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				//new EditAcademicInfo(createSessionFactory());
+			}
+		});
+		btnEdit.setBounds(396, 310, 89, 35);
+		pane2.add(btnEdit);
 		
 	}
 	public static SessionFactory createSessionFactory() {

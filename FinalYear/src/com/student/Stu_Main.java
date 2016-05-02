@@ -86,7 +86,7 @@ public class Stu_Main {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
-		panel.setBounds(0, 0, 188, 450);
+		panel.setBounds(0, 0, 251, 450);
 		frame1.getContentPane().add(panel);
 		panel.setLayout(null);
 		
@@ -97,7 +97,7 @@ public class Stu_Main {
 				ViewProfile p=new ViewProfile(Launcher.set_User);
 			}
 		});
-		btnProfile.setBounds(39, 26, 103, 23);
+		btnProfile.setBounds(39, 26, 128, 23);
 		panel.add(btnProfile);
 		
 		JButton btnSchedule = new JButton("Schedule");
@@ -111,21 +111,21 @@ public class Stu_Main {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnSchedule.setBounds(39, 72, 103, 23);
+		btnSchedule.setBounds(39, 72, 128, 23);
 		panel.add(btnSchedule);
 		
 		JButton btnResult = new JButton("Result");
 		btnResult.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				View_Result1 a=new View_Result1();
+				View_Result1 a=new View_Result1(Launcher.set_User);
 			}
 		});
 		btnResult.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnResult.setBounds(39, 117, 103, 23);
+		btnResult.setBounds(39, 117, 128, 23);
 		panel.add(btnResult);
 		
 		JButton btnNotice = new JButton("Notice");
@@ -134,13 +134,14 @@ public class Stu_Main {
 			public void mouseClicked(MouseEvent arg0) {
 				SessionFactory factory=createSessionFactory();
 				ViewNoticeFrame a= new ViewNoticeFrame("Notices",factory);
+				
 			}
 		});
 		btnNotice.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnNotice.setBounds(39, 165, 103, 23);
+		btnNotice.setBounds(39, 165, 128, 23);
 		panel.add(btnNotice);
 		
 		JButton btnMap = new JButton("Map");
@@ -150,7 +151,7 @@ public class Stu_Main {
 				View_Map a =new View_Map();
 			}
 		});
-		btnMap.setBounds(39, 218, 103, 23);
+		btnMap.setBounds(39, 218, 128, 23);
 		panel.add(btnMap);
 		
 		JButton btnDocuments = new JButton("Documents");
@@ -162,35 +163,37 @@ public class Stu_Main {
 				
 			}
 		});
-		btnDocuments.setBounds(39, 268, 103, 23);
+		btnDocuments.setBounds(39, 268, 128, 23);
 		panel.add(btnDocuments);
 		
-		JButton btnFee = new JButton("Fee");
+		JButton btnFee = new JButton("Area Of Interest");
+		btnFee.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		btnFee.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				View_Fee f=new View_Fee();
 			}
 		});
-		btnFee.setBounds(39, 315, 103, 23);
+		btnFee.setBounds(39, 315, 128, 23);
 		panel.add(btnFee);
 		
 		JButton btnLogout = new JButton("Logout");
 		btnLogout.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				Launcher li=new Launcher();
-				li.initialize();
 				JOptionPane.showMessageDialog(null, "Log Out");
 				frame1.dispose();
 			}
 		});
-		btnLogout.setBounds(39, 370, 103, 23);
+		btnLogout.setBounds(39, 370, 128, 23);
 		panel.add(btnLogout);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(Color.WHITE);
-		panel_1.setBounds(186, 0, 606, 450);
+		panel_1.setBounds(265, 0, 527, 450);
 		frame1.getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		

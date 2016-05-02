@@ -14,6 +14,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.border.SoftBevelBorder;
 
 import org.hibernate.Session;
@@ -24,6 +25,8 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 import com.student.Students;
+
+import teacher.Teachers;
 
 import javax.swing.border.BevelBorder;
 import javax.imageio.ImageIO;
@@ -48,7 +51,7 @@ public class EditCProfile {
 	private JLabel lblNewLabel_1;
 	private JTextField textField_2;
 	private JButton Save;
-	String name,userid,email,mobno,dept;
+	String name,userid,email,mobno,dept,user;
 	
 	/**
 	 * Launch the application.
@@ -73,6 +76,10 @@ public class EditCProfile {
 		initialize();
 	}
 
+	public EditCProfile(String x) {
+		user=x;
+		initialize();
+	}
 	/** 
 	 * Initialize the contents of the frame.
 	 */
@@ -133,28 +140,42 @@ public class EditCProfile {
 		frame1.getContentPane().add(lblNewLabel_1);
 		
 		textField_2 = new JTextField();
+		textField_2.setEditable(false);
 		textField_2.setBounds(169, 80, 149, 20);
 		frame1.getContentPane().add(textField_2);
 		textField_2.setColumns(10);
+		
+		SessionFactory factory=createSessionFactory();
+		Session s=factory.openSession();
+		Object ob=s.load(Coordinators.class,new String(user));
+		Coordinators tea=(Coordinators) ob;
+		textField.setText(tea.getName());
+		textField_2.setText(tea.getUserid());
+		textField_3.setText(tea.getMobno());
+		textField_4.setText(tea.getEmail());
+		s.close();
 		
 		Save = new JButton("Save");
 		Save.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				name=textField.getText();
+				mobno=textField_3.getText();
+				email=textField_4.getText();
 				SessionFactory factory=createSessionFactory();
 				Session s=factory.openSession();
-				Coordinators ob =new Coordinators();
-				ob.setUserid(userid);
-				ob.setEmail(email);
-				ob.setMobno(mobno);
-				ob.setName(name);
-				
 				Transaction tr= s.beginTransaction();
-				s.save(ob);
+				Object ob=s.load(Coordinators.class,new String(user));
+				Coordinators c =(Coordinators) ob;
+				c.setEmail(email);
+				c.setMobno(mobno);
+				c.setName(name);
 				System.out.println("data inserted");
 				tr.commit();
 				s.close();
 				factory.close();
+				JOptionPane.showMessageDialog(null, "Your Data Has Been Updated Successfully");
+				frame1.dispose();
 			}
 		});
 		Save.setBounds(339, 343, 89, 23);

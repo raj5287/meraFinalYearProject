@@ -13,11 +13,22 @@
     <property name="show_sql">true</property>
     
     <mapping class="com.student.Students"/>
-    <mapping class="coordinator.Coordinators"/>
-    <mapping class="teacher.Teachers"/>
+    <mapping class="com.student.SemMarksheet"/>
     <mapping class="com.hod.Hods"/>
-    <mapping class="coordinator.Documents"/>
-    <mapping class="coordinator.Notices"/>
-      
+    
+    <mapping class="coordinator.Coordinators"/>    
+    <mapping class="coordinator.CDocs"/>
+    <mapping class="coordinator.CNotices"/>
+    <mapping class="coordinator.CAttendance"/>
+    
+    <mapping class="teacher.Teachers"/>
+    <mapping class="teacher.TDocs"/>
+    <mapping class="teacher.TNotices"/>
+    <mapping class="teacher.TAttendance"/>
+    
+    <mapping class="com.visitingfaculty.VFaculty"/>
+    <mapping class="com.visitingfaculty.VFDocs"/>
+    <mapping class="com.visitingfaculty.VFNotices"/>
+    <mapping class="com.visitingfaculty.VFAttendance"/>  
   </session-factory>
 </hibernate-configuration>

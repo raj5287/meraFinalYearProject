@@ -28,11 +28,11 @@ public class ViewDocumentFrame extends JFrame {
 		String hql="from Documents";
 		Query q=s.createQuery(hql);
 		
-		List<Documents> list=q.list();
+		List<CDocs> list=q.list();
 		
 		String records[][]=new String[list.size()][4];
 		int r=0;
-		for(Documents rr : list){
+		for(CDocs rr : list){
 			records[r][0]=rr.getName();
 			records[r][1]=rr.getSubject();
 			records[r][2]=rr.getDate();

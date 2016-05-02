@@ -175,6 +175,7 @@ public class View_Profile {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				new EditTProfile(user);
+				frame1.dispose();
 			}
 		});
 		btnEdit.setBounds(336, 343, 89, 23);

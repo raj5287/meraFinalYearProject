@@ -6,6 +6,11 @@ import java.awt.Image;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
+
 import com.student.Launcher;
 
 import coordinator.SearchStudent;
@@ -20,10 +25,12 @@ import javax.swing.JOptionPane;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JComboBox;
 
 public class TeacherHome {
 
 	private JFrame frame;
+	int u=0;
 
 	/**
 	 * Launch the application.
@@ -100,35 +107,23 @@ public class TeacherHome {
 			@SuppressWarnings("static-access")
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-			//	LogIn li=new LogIn();
-			//	li.initialize();
-				JOptionPane.showMessageDialog(null, "Log Out");
+			JOptionPane.showMessageDialog(null, "Log Out");
 				frame.dispose();
 				
 				
 			}
 		});
-		btnLogout.setBounds(31, 324, 113, 23);
+		btnLogout.setBounds(31, 341, 113, 23);
 		frame.getContentPane().add(btnLogout);
 		
-		JButton btnDocuments = new JButton("Upload Documents");
-		btnDocuments.addMouseListener(new MouseAdapter() {
+		JButton btnNewButton_1 = new JButton("Upload");
+		btnNewButton_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				new UploadDoc();
 			}
 		});
-		btnDocuments.setBounds(31, 257, 113, 23);
-		frame.getContentPane().add(btnDocuments);
-		
-		JButton btnNewButton_1 = new JButton("Upload Notice");
-		btnNewButton_1.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				new UploadNotice();
-			}
-		});
-		btnNewButton_1.setBounds(31, 195, 113, 23);
+		btnNewButton_1.setBounds(31, 194, 113, 23);
 		frame.getContentPane().add(btnNewButton_1);
 		
 		JButton btnStudentInfo = new JButton("Student Info");
@@ -139,7 +134,51 @@ public class TeacherHome {
 				System.out.println("MOuse Clicked");
 			}
 		});
-		btnStudentInfo.setBounds(31, 132, 113, 23);
+		btnStudentInfo.setBounds(31, 133, 113, 23);
 		frame.getContentPane().add(btnStudentInfo);
+		
+		String[] view={"Attendance Sheet","Notices","Notes"};
+		JComboBox comboBox = new JComboBox(view);
+		comboBox.setBounds(31, 249, 113, 20);
+		frame.getContentPane().add(comboBox);
+		
+		JButton btnNewButton = new JButton("View");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String viewing = (String) comboBox.getSelectedItem();
+				if(viewing.equals("Attendance Sheet"))
+        		{
+        			u=1;
+        		}
+        		else if(viewing.equals("Notices")){
+        			u=2;
+        		}
+        		else if(viewing.equals("Notes")){
+        			u=3;
+        		}
+				System.out.println(u);
+				switch(u){
+					case 1:
+						new ViewAttendanceFrame("Attendance Sheet",createSessionFactory());
+						break;
+					case 2:
+						new ViewNoticeFrame("Notice",createSessionFactory());
+						break;
+					case 3:
+						new ViewNotesFrame("Notes",createSessionFactory());
+						break;
+				}
+			}
+		});
+		btnNewButton.setBounds(31, 291, 113, 23);
+		frame.getContentPane().add(btnNewButton);
+	}
+	public static SessionFactory createSessionFactory() {
+	    Configuration configuration = new Configuration();
+	    configuration.configure("hibernate.cfg.xml");
+	    ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
+	            configuration.getProperties()).build();
+	    SessionFactory sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+	    return sessionFactory;
 	}
 }

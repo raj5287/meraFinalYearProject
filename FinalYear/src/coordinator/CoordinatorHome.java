@@ -18,7 +18,6 @@ import javax.swing.JPanel;
 import com.student.Launcher;
 
 import teacher.UploadDoc;
-import teacher.UploadNotice;
 
 
 public class CoordinatorHome {
@@ -125,7 +124,7 @@ public class CoordinatorHome {
 		btnNewButton_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new UploadNotice();
+				//new UploadNotice();
 			}
 		});
 		btnNewButton_1.setBounds(31, 195, 113, 23);

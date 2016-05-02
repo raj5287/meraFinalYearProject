@@ -154,7 +154,6 @@ public class View_Profile {
 		Object ob=s.load(Coordinators.class,new String(user));
 		Coordinators tea=(Coordinators) ob;
 		textField.setText(tea.getName());
-		//textField_1.setText(tea.getDepartment());
 		textField_2.setText(tea.getUserid());
 		textField_3.setText(tea.getMobno());
 		textField_4.setText(tea.getEmail());
@@ -163,7 +162,7 @@ public class View_Profile {
 		btnEdit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//new EditCProfile(user);
+				new EditCProfile(user);
 			}
 		});
 		btnEdit.setBounds(336, 343, 89, 23);

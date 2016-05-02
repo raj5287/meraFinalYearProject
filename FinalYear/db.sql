@@ -5,4 +5,19 @@ create table documents(name varchar(30) not null primary key, subject varchar(30
 create table teachers(name varchar(30) not null, email varchar(30) not null,mobno varchar(30) not null,userid varchar(30) primary key,password varchar(30) not null);
 create table hods(name varchar(30) not null, email varchar(30) not null,mobno varchar(30) not null,userid varchar(30) primary key,password varchar(30) not null);
 create table notices(name varchar(30) not null primary key, subject varchar(30) not null,date varchar(15));
-ALTER table notices change date date varchar(30) not null;
+ALTER table tdocs change date date varchar(30) not null;
+ALTER table students change aoi aoi varchar(150) default null;
+create table tattendance(name varchar(30) not null primary key, subject varchar(30) not null,date varchar(15));
+create table tnotices(name varchar(30) not null primary key, subject varchar(30) not null,date varchar(15));
+create table tdocs(name varchar(30) not null primary key, subject varchar(30) not null,date varchar(15));
+ALTER table tdocs add column location varchar(150) default null;
+create table cnotices(name varchar(30) not null primary key, subject varchar(30) not null,date varchar(30),location varchar(150) default null);
+ALTER table vfnotes change name name varchar(100) not null;
+ALTER table students add column flocation varchar(50) default null;
+create table semmarksheet(name varchar(30) not null primary key,date varchar(30),location varchar(150) default null);
+ALTER table semmarksheet add column sem varchar(2) default null;
+create table vfnotices(name varchar(30) not null primary key, subject varchar(30) not null,date varchar(30),location varchar(150) default null);
+create table vfattendance(name varchar(30) not null primary key, subject varchar(30) not null,date varchar(30),location varchar(150) default null);
+create table vfnotes(name varchar(30) not null primary key, subject varchar(30) not null,date varchar(30),location varchar(150) default null);
+create table vfaculty(name varchar(30) not null, email varchar(30) not null,mobno varchar(30) not null,userid varchar(30) primary key,password varchar(30) not null);
+

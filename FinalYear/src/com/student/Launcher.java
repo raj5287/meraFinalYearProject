@@ -1,11 +1,14 @@
 
 package com.student;
+import com.visitingfaculty.*;
 import javax.swing.JOptionPane;
 
 import coordinator.CoordinatorHome;
 import coordinator.Coordinators;
 import teacher.TeacherHome;
 import teacher.Teachers;
+
+import com.admin.AdminHome;
 import com.hod.Hods;
 
 import java.io.File;
@@ -89,7 +92,7 @@ public class Launcher extends JFrame {
 	 */
 	@SuppressWarnings({ "static-access", "rawtypes", "unchecked" }) void initialize() {
 	    frame = new JFrame("SIS");
-		
+	    frame.setVisible(true);
 		frame.setFont(new Font("Times New Roman", Font.BOLD, 48));
 		frame.getContentPane().setBackground(Color.WHITE);
 		frame.setBackground(Color.WHITE);
@@ -115,7 +118,7 @@ public class Launcher extends JFrame {
 		lbl2.setBounds(571, 11, 112, 97);
 		frame.getContentPane().add(lbl2);
 		
-		String[] fname = {"Admin","HOD","Coordinator","Teacher","Student"};
+		String[] fname = {"Student","Teacher","Coordinator","HOD","Visiting Faculty","Admin",};
 		
 		JComboBox comboBox1;
 		comboBox1= new JComboBox(fname);
@@ -155,6 +158,12 @@ public class Launcher extends JFrame {
 			}
 			else if(user.equals("HOD")){
 				u=4;
+			}
+			else if(user.equals("Visiting Faculty")){
+				u=5;
+			}
+			else if(user.equals("Admin")){
+				u=6;
 			}
 			
 			String userid=tf1.getText();
@@ -272,37 +281,39 @@ public class Launcher extends JFrame {
 						}
 					}
 					break;
-					default:
-						Session a=factory.openSession();
-						String hqla="from ADMIN";
-						Query qa=a.createQuery(hqla);
-				
-						List<Students> lista=qa.list();
-				
-						String recordsa[][]=new String[lista.size()][2];
-						int p=0;
-						for(Students pp : lista){
-							recordsa[p][0]=pp.getEmailid();
-							recordsa[p][1]=pp.getPassword();
-							if(userid.equals(recordsa[p][0]) && pass.equals(recordsa[p][1])){
-								flag=1;
-								set_User=userid;
-								System.out.println("Login successful");
-								//create the object of next window here
-								new Stu_Main();
-								System.out.println("avb");
-								
-							}
-							else{
-								System.out.println("Login not successful");
-								p++;
-							}
+				case 5:
+					Session v=factory.openSession();
+					String hqlv="from VFaculty";
+					Query qv=v.createQuery(hqlv);
+			
+					List<VFaculty> listv=qv.list();
+			
+					String recordsv[][]=new String[listv.size()][2];
+					int k=0;
+					for(VFaculty kk : listv){
+						recordsv[k][0]=kk.getUserid();
+						recordsv[k][1]=kk.getPassword();
+						if(userid.equals(recordsv[k][0]) && pass.equals(recordsv[k][1])){
+							flag=1;
+							set_User=userid;
+							System.out.println("Login successful");
+							//create the object of next window here
+							new VFHome(set_User);
+							System.out.println("avb");
+							
 						}
-						break;
-				
-			
-			
-			
+						else{
+							System.out.println("Login not successful");
+							k++;
+						}
+					}
+					break;
+				case 6:
+					if(userid.equals("admin") && pass.equals("password")){
+						new AdminHome();
+					}
+					default:
+						//do nothing			
 			}	
 			
 		});

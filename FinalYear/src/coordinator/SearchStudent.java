@@ -134,6 +134,6 @@ public class SearchStudent {
 				new ViewStudentData();
 			}
 		});
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(frame.DISPOSE_ON_CLOSE);
 	}
 }

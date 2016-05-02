@@ -17,6 +17,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.border.SoftBevelBorder;
 
 import org.hibernate.Session;
@@ -28,10 +29,12 @@ import org.hibernate.service.ServiceRegistry;
 
 import com.student.Students;
 
-import coordinator.Documents;
+import coordinator.CDocs;
+import coordinator.SearchStudent;
 
 import javax.swing.border.BevelBorder;
 import javax.imageio.ImageIO;
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTextField;
@@ -46,6 +49,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Font;
 import javax.swing.JTextArea;
+import javax.swing.JRadioButton;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 @SuppressWarnings("unused")
 public class UploadDoc extends JFrame {
@@ -54,7 +60,8 @@ public class UploadDoc extends JFrame {
 	private JTextField sourceFileTextField;
 	static String fname;
 	private JTextField textField;
-	
+	static String addTo="";
+	int u=0;
 	
 	/**
 	 * Launch the application.
@@ -99,7 +106,58 @@ public class UploadDoc extends JFrame {
 		frame1.setDefaultCloseOperation(frame1.DISPOSE_ON_CLOSE);
 		frame1.getContentPane().setLayout(null);
 		
-		JButton btnBack = new JButton("Close");
+		sourceFileTextField = new JTextField();
+		sourceFileTextField.setBounds(32, 193, 156, 20);
+		frame1.getContentPane().add(sourceFileTextField);
+		sourceFileTextField.setColumns(10);
+		
+		textField = new JTextField();
+		textField.setBounds(152, 41, 312, 20);
+		frame1.getContentPane().add(textField);
+		textField.setColumns(10);
+		
+		JLabel lblEnterTheSubject = new JLabel("Enter The Subject");
+		lblEnterTheSubject.setFont(new Font("Times New Roman", Font.BOLD, 12));
+		lblEnterTheSubject.setBounds(32, 40, 113, 23);
+		frame1.getContentPane().add(lblEnterTheSubject);
+		
+		JRadioButton rdbtnAttendance = new JRadioButton("Attendance");
+		rdbtnAttendance.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				addTo="Attendance";
+				System.out.println(addTo);
+			}
+		});
+		rdbtnAttendance.setBounds(67, 121, 109, 23);
+		frame1.getContentPane().add(rdbtnAttendance);
+		
+		JRadioButton rdbtnNotice = new JRadioButton("Notice");
+		rdbtnNotice.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				addTo="Notice";
+				System.out.println(addTo);
+			}
+		});
+		rdbtnNotice.setBounds(234, 121, 109, 23);
+		frame1.getContentPane().add(rdbtnNotice);
+		
+		JRadioButton rdbtnNotes = new JRadioButton("Notes");
+		rdbtnNotes.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				addTo="Notes";
+				System.out.println(addTo);
+			}
+		});
+		rdbtnNotes.setBounds(419, 121, 109, 23);
+		frame1.getContentPane().add(rdbtnNotes);
+		
+		ButtonGroup group = new ButtonGroup();
+	    group.add(rdbtnAttendance);
+	    group.add(rdbtnNotice);
+	    group.add(rdbtnNotes);
+	    
+	    
+	    JButton btnBack = new JButton("Close");
 		btnBack.setFont(new Font("Times New Roman", Font.BOLD, 12));
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -130,15 +188,11 @@ public class UploadDoc extends JFrame {
                 }
 			}
 		});
-		btnBrowse.setBounds(234, 136, 89, 23);
+		btnBrowse.setBounds(234, 192, 89, 23);
 		frame1.getContentPane().add(btnBrowse);
 		
 		JButton btnUpload = new JButton("Upload");
 		btnUpload.setFont(new Font("Times New Roman", Font.BOLD, 12));
-		btnUpload.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnUpload.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -148,50 +202,101 @@ public class UploadDoc extends JFrame {
 				File destinationFile = new File(destination);
                 Path sourcePath = sourceFile.toPath();
                 Path destinationPath = destinationFile.toPath();
-                try {
-                	
-                	String myDate = java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
+                if(addTo.equals("Attendance"))
+        		{
+        			u=1;
+        		}
+        		else if(addTo.equals("Notice")){
+        			u=2;
+        		}
+        		else if(addTo.equals("Notes")){
+        			u=3;
+        		}
+
+                System.out.println(u);
+               switch(u){
+               case 1:
+            	   try {
+                   	
+                   	String myDate = java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
                     String subject=textField.getText();
-                    //database code
+                       //database code
                     SessionFactory factory=createSessionFactory();
-    				Session s=factory.openSession();
-    				Documents ob =new Documents();
-    				ob.setName(fname);
-    				ob.setDate(myDate);
-    				ob.setSubject(subject);
-    				ob.setLocation(destination);
-    				Transaction tr= s.beginTransaction();
-    				s.save(ob);
-    				System.out.println("data inserted");
-    				tr.commit();
-    				s.close();
-    				factory.close();
-    				
-                    Files.copy(sourcePath, destinationPath);
-                    System.out.print("File Copied");
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-                
+       				Session s=factory.openSession();
+       				TAttendance ob =new TAttendance();
+       				ob.setName(fname);
+       				ob.setDate(myDate);
+       				ob.setSubject(subject);
+       				ob.setLocation(destination);
+       				Transaction tr= s.beginTransaction();
+       				s.save(ob);
+       				System.out.println("data inserted");
+       				tr.commit();
+       				s.close();
+       				factory.close();
+       				
+                       Files.copy(sourcePath, destinationPath);
+                       System.out.print("File Copied");
+                   } catch (IOException ex) {
+                       ex.printStackTrace();
+                   }
+               case 2:
+            	   try {
+                   	
+                   	String myDate = java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
+                       String subject=textField.getText();
+                       //database code
+                       SessionFactory factory=createSessionFactory();
+       				Session s=factory.openSession();
+       				TNotices ob =new TNotices();
+       				ob.setName(fname);
+       				ob.setDate(myDate);
+       				ob.setSubject(subject);
+       				ob.setLocation(destination);
+       				Transaction tr= s.beginTransaction();
+       				s.save(ob);
+       				System.out.println("data inserted");
+       				tr.commit();
+       				s.close();
+       				factory.close();
+       				
+                       Files.copy(sourcePath, destinationPath);
+                       System.out.print("File Copied");
+                   } catch (IOException ex) {
+                       ex.printStackTrace();
+                   }
+               case 3:
+            	   try {
+                   	
+                   	String myDate = java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
+                       String subject=textField.getText();
+                       //database code
+                       SessionFactory factory=createSessionFactory();
+       				Session s=factory.openSession();
+       				TDocs ob =new TDocs();
+       				ob.setName(fname);
+       				ob.setDate(myDate);
+       				ob.setSubject(subject);
+       				ob.setLocation(destination);
+       				Transaction tr= s.beginTransaction();
+       				s.save(ob);
+       				System.out.println("data inserted");
+       				tr.commit();
+       				s.close();
+       				factory.close();
+       				
+                       Files.copy(sourcePath, destinationPath);
+                       System.out.print("File Copied");
+                   } catch (IOException ex) {
+                       ex.printStackTrace();
+                   }
+               }
+               JOptionPane.showMessageDialog(null, "Uploaded Successfully");
+				frame1.dispose();
 			}
 		});
-		btnUpload.setBounds(375, 136, 89, 23);
+		btnUpload.setBounds(375, 192, 89, 23);
 		frame1.getContentPane().add(btnUpload);
-		
-		sourceFileTextField = new JTextField();
-		sourceFileTextField.setBounds(32, 137, 156, 20);
-		frame1.getContentPane().add(sourceFileTextField);
-		sourceFileTextField.setColumns(10);
-		
-		textField = new JTextField();
-		textField.setBounds(152, 41, 312, 20);
-		frame1.getContentPane().add(textField);
-		textField.setColumns(10);
-		
-		JLabel lblEnterTheSubject = new JLabel("Enter The Subject");
-		lblEnterTheSubject.setFont(new Font("Times New Roman", Font.BOLD, 12));
-		lblEnterTheSubject.setBounds(32, 40, 113, 23);
-		frame1.getContentPane().add(lblEnterTheSubject);
 	}
 	
 	public static SessionFactory createSessionFactory() {
