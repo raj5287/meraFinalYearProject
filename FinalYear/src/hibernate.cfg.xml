@@ -25,6 +25,8 @@
     <mapping class="teacher.TDocs"/>
     <mapping class="teacher.TNotices"/>
     <mapping class="teacher.TAttendance"/>
+    <mapping class="teacher.TAttendance"/>
+    <mapping class="teacher.QuestionPaper"/>
     
     <mapping class="com.visitingfaculty.VFaculty"/>
     <mapping class="com.visitingfaculty.VFDocs"/>

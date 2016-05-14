@@ -18,6 +18,7 @@ import coordinator.SearchStudent;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
@@ -25,6 +26,9 @@ import javax.swing.JOptionPane;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
+
 import javax.swing.JComboBox;
 
 public class TeacherHome {
@@ -96,7 +100,14 @@ public class TeacherHome {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 			@SuppressWarnings("unused")
-			View_Schedule a= new View_Schedule();
+			String loc="C:/Users/shivam/Downloads/routine.pdf";
+			File file1 = new File(loc);
+			try {
+				Desktop.getDesktop().open(file1);
+			} catch (IOException eb) {
+				// TODO Auto-generated catch block
+				eb.printStackTrace();
+			}
 			}
 		});
 		btnSchedule.setBounds(31, 79, 113, 23);
@@ -120,7 +131,7 @@ public class TeacherHome {
 		btnNewButton_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new UploadDoc();
+				new UploadDoc(Launcher.set_User);
 			}
 		});
 		btnNewButton_1.setBounds(31, 194, 113, 23);

@@ -1,8 +1,12 @@
 package com.student;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -22,6 +26,7 @@ public class Students {
 	private String dnou,stream,dyop,dsper;
 	//b.tech details
 	private String marks1,marks2,marks3,marks4,marks5,marks6,marks7,marks8,flocation;
+		
 	@Id
 	public String getUserid() {
 		return userid;

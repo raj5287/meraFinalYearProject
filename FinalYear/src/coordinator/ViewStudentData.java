@@ -95,7 +95,7 @@ public class ViewStudentData extends JFrame {
 		JButton btnPersonalInfo = new JButton("Personal Info");
 		btnPersonalInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new ViewProfile(setUser);
+				new ViewStuProfile(setUser);
 			}
 		});
 		btnPersonalInfo.setFont(new Font("Times New Roman", Font.BOLD, 12));

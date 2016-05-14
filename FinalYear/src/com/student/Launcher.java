@@ -144,178 +144,164 @@ public class Launcher extends JFrame {
 		btn1.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btn1.addActionListener((evt)-> {
 			
+			String userid=tf1.getText();
+			String pass=new String (pf1.getPassword());
+			SessionFactory f=createSessionFactory();
+			factory=f;
 			int u=0;
 			String user = (String) comboBox1.getSelectedItem();	//getting user from combobox
 			if(user.equals("Student"))
 			{
 				u=1;
+				Session s=factory.openSession();
+				String hql="from Students";
+				Query q=s.createQuery(hql);
+		
+				List<Students> list=q.list();
+		
+				String records[][]=new String[list.size()][2];
+				int r=0;
+				for(Students rr : list){
+					records[r][0]=rr.getUserid();
+					records[r][1]=rr.getPassword();
+					if(userid.equals(records[r][0]) && pass.equals(records[r][1])){
+						flag=1;
+						set_User=userid;
+						System.out.println("Login successful");
+						//create the object of next window here
+						new Stu_Main();
+						break;
+					}
+					else{
+						flag=0;
+						r++;
+					}
+				}
 			}
 			else if(user.equals("Teacher")){
 				u=2;
+				Session t=factory.openSession();
+				String hqlt="from Teachers";
+				Query qt=t.createQuery(hqlt);
+		
+				List<Teachers> listt=qt.list();
+		
+				String recordst[][]=new String[listt.size()][2];
+				int l=0;
+				for(Teachers ll : listt){
+					recordst[l][0]=ll.getUserid();
+					recordst[l][1]=ll.getPassword();
+					if(userid.equals(recordst[l][0]) && pass.equals(recordst[l][1])){
+						flag=1;
+						set_User=userid;
+						System.out.println("Login successful");
+						//create the object of next window here
+						new TeacherHome();
+						break;
+						
+					}
+					else{
+						flag=0;
+						l++;
+					}
+				}
 			}
 			else if(user.equals("Coordinator")){
 				u=3;
+				Session c=factory.openSession();
+				String hqlc="from Coordinators";
+				Query qc=c.createQuery(hqlc);
+		
+				List<Coordinators> listc=qc.list();
+		
+				String recordsc[][]=new String[listc.size()][2];
+				int m=0;
+				for(Coordinators mm : listc){
+					recordsc[m][0]=mm.getUserid();
+					recordsc[m][1]=mm.getPassword();
+					if(userid.equals(recordsc[m][0]) && pass.equals(recordsc[m][1])){
+						flag=1;
+						set_User=userid;
+						System.out.println("Login successful");
+						//create the object of next window here
+						new CoordinatorHome();
+						break;
+						
+					}
+					else{
+						flag=0;
+						m++;
+					}
+				}
 			}
 			else if(user.equals("HOD")){
 				u=4;
+				Session h=factory.openSession();
+				String hqlh="from Hods";
+				Query qh=h.createQuery(hqlh);
+		
+				List<Hods> listh=qh.list();
+		
+				String recordsh[][]=new String[listh.size()][2];
+				int n=0;
+				for(Hods nn : listh){
+					recordsh[n][0]=nn.getUserid();
+					recordsh[n][1]=nn.getPassword();
+					if(userid.equals(recordsh[n][0]) && pass.equals(recordsh[n][1])){
+						flag=1;
+						set_User=userid;
+						System.out.println("Login successful");
+						//create the object of next window here
+						new Stu_Main();
+						System.out.println("avb");
+						break;
+					}
+					else{
+						flag=0;
+						n++;
+					}
+				}
 			}
 			else if(user.equals("Visiting Faculty")){
 				u=5;
+				Session v=factory.openSession();
+				String hqlv="from VFaculty";
+				Query qv=v.createQuery(hqlv);
+		
+				List<VFaculty> listv=qv.list();
+		
+				String recordsv[][]=new String[listv.size()][2];
+				int k=0;
+				for(VFaculty kk : listv){
+					recordsv[k][0]=kk.getUserid();
+					recordsv[k][1]=kk.getPassword();
+					if(userid.equals(recordsv[k][0]) && pass.equals(recordsv[k][1])){
+						flag=1;
+						set_User=userid;
+						System.out.println("Login successful");
+						//create the object of next window here
+						new VFHome(set_User);
+						System.out.println("avb");
+						
+					}
+					else{
+						flag=0;
+						k++;
+					}
+				}
 			}
 			else if(user.equals("Admin")){
 				u=6;
+				if(userid.equals("admin") && pass.equals("password")){
+					new AdminHome();
+				}
+				else{
+					flag=0;
+				}
 			}
-			
-			String userid=tf1.getText();
-			String pass=new String (pf1.getPassword());
-			SessionFactory f=createSessionFactory();
-			factory=f;
-			
-			switch(u){
-				case 1:
-						Session s=factory.openSession();
-						String hql="from Students";
-						Query q=s.createQuery(hql);
-				
-						List<Students> list=q.list();
-				
-						String records[][]=new String[list.size()][2];
-						int r=0;
-						for(Students rr : list){
-							records[r][0]=rr.getUserid();
-							records[r][1]=rr.getPassword();
-							if(userid.equals(records[r][0]) && pass.equals(records[r][1])){
-								flag=1;
-								set_User=userid;
-								System.out.println("Login successful");
-								//create the object of next window here
-								new Stu_Main();
-								System.out.println("avb");
-								
-							}
-							else{
-								System.out.println("Login not successful");
-								r++;
-							}
-						}
-						break;
-						
-				case 2:
-					Session t=factory.openSession();
-					String hqlt="from Teachers";
-					Query qt=t.createQuery(hqlt);
-			
-					List<Teachers> listt=qt.list();
-			
-					String recordst[][]=new String[listt.size()][2];
-					int l=0;
-					for(Teachers ll : listt){
-						recordst[l][0]=ll.getUserid();
-						recordst[l][1]=ll.getPassword();
-						if(userid.equals(recordst[l][0]) && pass.equals(recordst[l][1])){
-							flag=1;
-							set_User=userid;
-							System.out.println("Login successful");
-							//create the object of next window here
-							new TeacherHome();
-							System.out.println("avb");
-							
-						}
-						else{
-							System.out.println("Login not successful");
-							l++;
-						}
-					}
-					break;
-				case 3:
-					Session c=factory.openSession();
-					String hqlc="from Coordinators";
-					Query qc=c.createQuery(hqlc);
-			
-					List<Coordinators> listc=qc.list();
-			
-					String recordsc[][]=new String[listc.size()][2];
-					int m=0;
-					for(Coordinators mm : listc){
-						recordsc[m][0]=mm.getUserid();
-						recordsc[m][1]=mm.getPassword();
-						if(userid.equals(recordsc[m][0]) && pass.equals(recordsc[m][1])){
-							flag=1;
-							set_User=userid;
-							System.out.println("Login successful");
-							//create the object of next window here
-							new CoordinatorHome();
-							System.out.println("avb");
-							
-						}
-						else{
-							System.out.println("Login not successful");
-							m++;
-						}
-					}
-					break;
-				case 4:
-					Session h=factory.openSession();
-					String hqlh="from Hods";
-					Query qh=h.createQuery(hqlh);
-			
-					List<Hods> listh=qh.list();
-			
-					String recordsh[][]=new String[listh.size()][2];
-					int n=0;
-					for(Hods nn : listh){
-						recordsh[n][0]=nn.getUserid();
-						recordsh[n][1]=nn.getPassword();
-						if(userid.equals(recordsh[n][0]) && pass.equals(recordsh[n][1])){
-							flag=1;
-							set_User=userid;
-							System.out.println("Login successful");
-							//create the object of next window here
-							new Stu_Main();
-							System.out.println("avb");
-							
-						}
-						else{
-							System.out.println("Login not successful");
-							n++;
-						}
-					}
-					break;
-				case 5:
-					Session v=factory.openSession();
-					String hqlv="from VFaculty";
-					Query qv=v.createQuery(hqlv);
-			
-					List<VFaculty> listv=qv.list();
-			
-					String recordsv[][]=new String[listv.size()][2];
-					int k=0;
-					for(VFaculty kk : listv){
-						recordsv[k][0]=kk.getUserid();
-						recordsv[k][1]=kk.getPassword();
-						if(userid.equals(recordsv[k][0]) && pass.equals(recordsv[k][1])){
-							flag=1;
-							set_User=userid;
-							System.out.println("Login successful");
-							//create the object of next window here
-							new VFHome(set_User);
-							System.out.println("avb");
-							
-						}
-						else{
-							System.out.println("Login not successful");
-							k++;
-						}
-					}
-					break;
-				case 6:
-					if(userid.equals("admin") && pass.equals("password")){
-						new AdminHome();
-					}
-					default:
-						//do nothing			
-			}	
-			
+			if(flag!=1){
+				JOptionPane.showMessageDialog(null, "Incorrect Username or Password");}
+		
 		});
 		btn1.setBounds(431, 323, 103, 32);
 		frame.getContentPane().add(btn1);
@@ -382,7 +368,7 @@ public class Launcher extends JFrame {
 		lblRegisterHere.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRegisterHere.setBounds(496, 403, 103, 14);
 		frame.getContentPane().add(lblRegisterHere);
-		
+		setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
 	}
 		
 	public static SessionFactory createSessionFactory() {

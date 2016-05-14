@@ -2,6 +2,8 @@ package com.student;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -41,13 +43,24 @@ public class SemMarksheet {
 	public void setSem(String sem) {
 		this.sem = sem;
 	}
+	
 
-	public SemMarksheet(String name, String date, String location,String sem) {
+	private String userid;
+	public String getUserid() {
+		return userid;
+	}
+
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+
+	public SemMarksheet(String name, String date, String location,String sem,String userid) {
 		super();
 		this.name = name;
 		this.date = date;
 		this.location = location;
 		this.sem = sem;
+		this.userid = userid;
 	}
 
 	public SemMarksheet() {

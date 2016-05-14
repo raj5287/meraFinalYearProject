@@ -15,6 +15,8 @@ import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
 import java.awt.Color;
+import java.awt.Desktop;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.border.SoftBevelBorder;
@@ -38,7 +40,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 @SuppressWarnings("unused")
-public class Stu_Main {
+public class Stu_Main extends JFrame {
 
 	private JFrame frame1;
 	private SessionFactory factory;
@@ -73,7 +75,7 @@ public class Stu_Main {
 	
 	@SuppressWarnings("static-access")
 	void initialize() {
-		frame1 = new JFrame("SIS ");
+		frame1 = new JFrame("Student Home");
 		frame1.getContentPane().setBackground(Color.WHITE);
 				
 //		frame.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("bg1.png")))));
@@ -100,11 +102,18 @@ public class Stu_Main {
 		btnProfile.setBounds(39, 26, 128, 23);
 		panel.add(btnProfile);
 		
-		JButton btnSchedule = new JButton("Schedule");
+		JButton btnSchedule = new JButton("View Schedule");
 		btnSchedule.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				View_Schedule a= new View_Schedule();
+				String loc="C:/Users/shivam/Downloads/routine.pdf";
+				File file1 = new File(loc);
+				try {
+					Desktop.getDesktop().open(file1);
+				} catch (IOException eb) {
+					// TODO Auto-generated catch block
+					eb.printStackTrace();
+				}
 			}
 		});
 		btnSchedule.addActionListener(new ActionListener() {
@@ -114,21 +123,21 @@ public class Stu_Main {
 		btnSchedule.setBounds(39, 72, 128, 23);
 		panel.add(btnSchedule);
 		
-		JButton btnResult = new JButton("Result");
+		JButton btnResult = new JButton("Upload/View Sem Marksheet");
 		btnResult.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				View_Result1 a=new View_Result1(Launcher.set_User);
+				ViewResult a=new ViewResult(Launcher.set_User);
 			}
 		});
 		btnResult.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnResult.setBounds(39, 117, 128, 23);
+		btnResult.setBounds(10, 117, 175, 23);
 		panel.add(btnResult);
 		
-		JButton btnNotice = new JButton("Notice");
+		JButton btnNotice = new JButton("View Notices");
 		btnNotice.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -144,7 +153,7 @@ public class Stu_Main {
 		btnNotice.setBounds(39, 165, 128, 23);
 		panel.add(btnNotice);
 		
-		JButton btnMap = new JButton("Map");
+		JButton btnMap = new JButton("View Map");
 		btnMap.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -154,7 +163,7 @@ public class Stu_Main {
 		btnMap.setBounds(39, 218, 128, 23);
 		panel.add(btnMap);
 		
-		JButton btnDocuments = new JButton("Documents");
+		JButton btnDocuments = new JButton("View Documents");
 		btnDocuments.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -202,7 +211,7 @@ public class Stu_Main {
 		lblNewLabel.setIcon(new ImageIcon(img));
 		lblNewLabel.setBounds(109, 80, 341, 256);
 		panel_1.add(lblNewLabel);	
-		
+		setDefaultCloseOperation(frame1.EXIT_ON_CLOSE);
 	}
 	
 	public static SessionFactory createSessionFactory() {

@@ -98,16 +98,16 @@ public class SearchStudent {
 	    rdbtnName.setMnemonic(KeyEvent.VK_C);
 	    rdbtnUniversityRollNo.setMnemonic(KeyEvent.VK_M);
 		
-		String[] semester={"1","2","3","4","5","6","7","8"};
+		String[] semester={"1","2","3","4"};
 		JComboBox comboBox = new JComboBox(semester);
-		comboBox.setBounds(603, 23, 46, 20);
+		comboBox.setBounds(627, 23, 46, 20);
 		frame.getContentPane().add(comboBox);
 		sem= (String) comboBox.getSelectedItem();
 		
 		
-		JLabel lblSem = new JLabel("Sem");
+		JLabel lblSem = new JLabel("Current Year");
 		lblSem.setFont(new Font("Times New Roman", Font.BOLD, 12));
-		lblSem.setBounds(528, 26, 46, 14);
+		lblSem.setBounds(528, 26, 89, 14);
 		frame.getContentPane().add(lblSem);
 		
 		JButton btnSearch = new JButton("Search");

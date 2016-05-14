@@ -15,9 +15,16 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
+
 import com.student.Launcher;
 
 import teacher.UploadDoc;
+
+import javax.swing.JComboBox;
 
 
 public class CoordinatorHome {
@@ -80,7 +87,7 @@ public class CoordinatorHome {
 				
 			}
 		});
-		btnProfile.setBounds(31, 27, 113, 23);
+		btnProfile.setBounds(31, 27, 141, 23);
 		frame.getContentPane().add(btnProfile);
 		
 		JButton btnSchedule = new JButton("Schedule");
@@ -91,7 +98,7 @@ public class CoordinatorHome {
 			View_Schedule a= new View_Schedule();
 			}
 		});
-		btnSchedule.setBounds(31, 79, 113, 23);
+		btnSchedule.setBounds(31, 79, 141, 23);
 		frame.getContentPane().add(btnSchedule);
 		
 		JButton btnLogout = new JButton("Logout");
@@ -99,48 +106,66 @@ public class CoordinatorHome {
 			@SuppressWarnings("static-access")
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-			//	LogIn li=new LogIn();
-			//	li.initialize();
 				JOptionPane.showMessageDialog(null, "Log Out");
-				frame.dispose();
-				
-				
+				frame.dispose();		
 			}
 		});
-		btnLogout.setBounds(31, 324, 113, 23);
+		btnLogout.setBounds(31, 363, 141, 23);
 		frame.getContentPane().add(btnLogout);
 		
-		JButton btnDocuments = new JButton("Upload Documents");
-		btnDocuments.addMouseListener(new MouseAdapter() {
+		JButton btnNewButton_1 = new JButton("Upload ");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnNewButton_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				new UploadDoc();
 			}
 		});
-		btnDocuments.setBounds(31, 257, 113, 23);
-		frame.getContentPane().add(btnDocuments);
-		
-		JButton btnNewButton_1 = new JButton("Upload Notice");
-		btnNewButton_1.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				//new UploadNotice();
-			}
-		});
-		btnNewButton_1.setBounds(31, 195, 113, 23);
+		btnNewButton_1.setBounds(31, 310, 141, 23);
 		frame.getContentPane().add(btnNewButton_1);
 		
-		JButton btnStudentInfo = new JButton("Student Info");
-		btnStudentInfo.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				new SearchStudent();
-				System.out.println("MOuse Clicked");
+		String[] ss={"Student Info","Teacher Info","Visiting Faculty Info"};
+		JComboBox comboBox = new JComboBox(ss);
+		comboBox.setBounds(31, 127, 141, 20);
+		frame.getContentPane().add(comboBox);
+		
+		JButton btnNewButton = new JButton("View Info");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String inf=(String) comboBox.getSelectedItem();
+				if(inf.equals("Student Info"))
+				{
+					new SearchStudent();
+				}
+				else if(inf.equals("Teacher Info")){
+					new ViewTeacherFrame("Teachers",createSessionFactory());
+				}
+				else if(inf.equals("Visiting Faculty Info")){
+					new ViewVFFrame("Teachers",createSessionFactory());
+				}
 			}
 		});
-		btnStudentInfo.setBounds(31, 132, 113, 23);
-		frame.getContentPane().add(btnStudentInfo);
+		btnNewButton.setBounds(31, 171, 141, 23);
+		frame.getContentPane().add(btnNewButton);
+		
+		String []s1={"Notice","Notes","Attendence","Seminar","Placement","Project"};
+		JComboBox comboBox_1 = new JComboBox(s1);
+		comboBox_1.setBounds(31, 219, 141, 20);
+		frame.getContentPane().add(comboBox_1);
+		
+		JButton btnViewDocuments = new JButton("View ");
+		btnViewDocuments.setBounds(31, 260, 141, 23);
+		frame.getContentPane().add(btnViewDocuments);
 	}
-
-
+	public static SessionFactory createSessionFactory() {
+	    Configuration configuration = new Configuration();
+	    configuration.configure("hibernate.cfg.xml");
+	    ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
+	            configuration.getProperties()).build();
+	    SessionFactory sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+	    return sessionFactory;
+	}
 }
